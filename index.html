@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html,
+        body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: "Open Sans", sans-serif;
+        }
+
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-poster {
+            animation: heroFadeIn 1s ease-out both;
+            transition: transform 0.35s ease;
+            cursor: pointer;
+        }
+
+        .hero-poster:hover {
+            transform: scale(1.08);
+        }
+
+        .hero-dot {
+            background-color: #313c40;
+            transition: background-color 0.45s ease-in-out;
+        }
+
+        @keyframes filmRoll {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .film-roll {
+            animation: filmRoll 18s linear infinite;
+            transform-origin: center;
+        }
+
+        .film-roll-reverse {
+            animation: filmRoll 18s linear infinite reverse;
+            transform-origin: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-[#030303]">
+        <div class="relative mx-auto flex w-[90%] items-center justify-between py-3">
+            <a href="#" class="shrink-0">
+                <img src="assets/logo.jpg" alt="IFFD Logo" class="h-[100px] w-auto" />
+            </a>
+
+            <nav class="ml-8 hidden items-center justify-end gap-x-5 text-[14px] font-medium text-white min-[1481px]:flex">
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">About Us</a>
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Festival Schedule &amp; guide</a>
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Film Selection</a>
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">CineXchange</a>
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">CineVerse Expo</a>
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Masterclasses</a>
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Workshops/Live Demos</a>
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Registrations</a>
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">FAQ</a>
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">MEDIA</a>
+            </nav>
+
+            <nav class="ml-8 hidden items-center justify-end gap-x-5 text-[14px] font-medium text-white min-[1024px]:flex min-[1481px]:hidden">
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">About Us</a>
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Festival Schedule &amp; guide</a>
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Film Selection</a>
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">CineXchange</a>
+                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">CineVerse Expo</a>
+                <div class="relative">
+                    <button id="desktop-more-toggle" class="flex items-center gap-2 transition hover:text-gray-300" type="button">
+                        <span>More</span>
+                        <svg id="desktop-more-arrow" class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.51a.75.75 0 01-1.08 0l-4.25-4.51a.75.75 0 01.02-1.06z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    <div id="desktop-more-menu" class="absolute right-0 top-full z-30 mt-3 hidden min-w-[220px] rounded border border-white/10 bg-[#111111] p-3 text-[14px] shadow-lg">
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-300">Masterclasses</a>
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-300">Workshops/Live Demos</a>
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-300">Registrations</a>
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-300">FAQ</a>
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-300">MEDIA</a>
+                    </div>
+                </div>
+            </nav>
+
+            <button
+                id="menu-toggle"
+                class="inline-flex h-10 w-10 items-center justify-center rounded border border-white/20 text-white transition hover:bg-white/10 lg:hidden"
+                aria-label="Open menu"
+                type="button"
+            >
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </button>
+
+            <img
+                src="assets/Delhi-Govt.png"
+                alt="Delhi Government"
+                class="hidden w-[150px] shrink-0 lg:block"
+            />
+
+            <img
+                src="assets/Delhi-Govt.png"
+                alt="Delhi Government"
+                class="pointer-events-none absolute left-1/2 top-1/2 w-[92px] -translate-x-1/2 -translate-y-1/2 lg:hidden"
+            />
+        </div>
+
+        <div id="mobile-menu-overlay" class="fixed inset-0 z-[999] hidden bg-black/60 lg:hidden"></div>
+        <aside
+            id="mobile-menu-drawer"
+            class="fixed right-0 top-0 z-[1000] h-full w-[320px] max-w-[85vw] translate-x-full overflow-y-auto bg-[#111111] p-6 text-white transition-transform duration-300 ease-in-out lg:hidden"
+            aria-label="Mobile menu"
+        >
+            <div class="flex items-center justify-between">
+                <span class="text-[14px] font-semibold uppercase tracking-wide text-white/70">Menu</span>
+                <button
+                    id="menu-close"
+                    class="inline-flex h-9 w-9 items-center justify-center rounded border border-white/20 transition hover:bg-white/10"
+                    aria-label="Close menu"
+                    type="button"
+                >
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M6 6l12 12M18 6l-12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <nav id="mobile-menu-links" class="mt-8 flex flex-col gap-4 text-[14px] font-medium text-white">
+                <a href="#" class="block text-white transition hover:text-gray-300">About Us</a>
+                <a href="#" class="block text-white transition hover:text-gray-300">Festival Schedule &amp; guide</a>
+                <a href="#" class="block text-white transition hover:text-gray-300">Film Selection</a>
+                <a href="#" class="block text-white transition hover:text-gray-300">CineXchange</a>
+                <a href="#" class="block text-white transition hover:text-gray-300">CineVerse Expo</a>
+                <a href="#" class="block text-white transition hover:text-gray-300">Masterclasses</a>
+                <a href="#" class="block text-white transition hover:text-gray-300">Workshops/Live Demos</a>
+                <a href="#" class="block text-white transition hover:text-gray-300">Registrations</a>
+                <a href="#" class="block text-white transition hover:text-gray-300">FAQ</a>
+                <a href="#" class="block text-white transition hover:text-gray-300">MEDIA</a>
+            </nav>
+        </aside>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section
+        id="hero-section"
+        class="relative flex min-h-[1000px] flex-col overflow-hidden bg-cover bg-center h-auto md:h-[900px] lg:h-[960px] min-[1240px]:h-auto"
+        style="background-image: url('assets/main-sec.jpg');"
+    >
+        <div id="hero-left-scale" class="absolute left-0 top-6 origin-left scale-[0.52] sm:scale-[0.68] md:top-1/2 md:scale-[0.82] lg:scale-100">
+            <div id="hero-left-decor">
+                <div class="flex flex-col items-start md:-translate-y-1/2">
+                    <div id="hero-dots">
+                        <div class="grid grid-cols-3 gap-2">
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                            <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
+                        </div>
+                    </div>
+                    <img
+                        src="assets/leftbottom.png"
+                        alt="Decorative left shape"
+                        class="mt-6 w-[110px] sm:w-[130px] md:w-[145px] lg:w-[160px] min-[1280px]:w-[140px]"
+                    />
+                </div>
+            </div>
+        </div>
+        <div id="hero-right-scale" class="pointer-events-none absolute inset-0 origin-top-right scale-[0.58] sm:scale-[0.66] md:scale-[0.76] lg:scale-[0.88] xl:scale-100">
+            <div id="hero-right-decor" class="relative h-full w-full">
+                <img
+                    src="assets/circle-film.png"
+                    alt="Film reel decoration"
+                    class="film-roll absolute -right-[85px] top-[12%] w-[170px]"
+                />
+                <img
+                    src="assets/grddnflower.png"
+                    alt="Green flower decoration"
+                    class="film-roll-reverse absolute -right-[85px] top-[calc(12%+170px)] z-30 w-[170px]"
+                />
+                <img
+                    src="assets/pinkflower.png"
+                    alt="Pink flower decoration"
+                    class="film-roll absolute -right-[136px] top-[calc(12%+286px)] z-10 w-[272px]"
+                />
+                <img
+                    src="assets/white-circle.png"
+                    alt="White circle decoration"
+                    class="absolute right-0 top-[calc(12%+460px)] z-[5] w-[96px]"
+                />
+                <img
+                    src="assets/arrowbg.png"
+                    alt="Arrow background decoration"
+                    class="absolute right-0 top-[calc(12%+640px)] z-[6] w-[90px]"
+                />
+                <img
+                    src="assets/pinkarrow.png"
+                    alt="Pink arrow decoration"
+                    class="absolute right-[130px] top-[calc(12%+484px)] z-[6] w-[110px]"
+                />
+                <img
+                    src="assets/yellowflower.png"
+                    alt="Yellow flower decoration"
+                    class="film-roll-reverse absolute -right-[85px] top-[calc(12%+337px)] z-20 w-[170px]"
+                />
+            </div>
+        </div>
+        <div class="mx-auto flex w-full justify-center pt-6 md:pt-8">
+            <img src="assets/View-Film.png" alt="View Film" class="hero-poster h-auto w-[190px] max-w-[80%] sm:w-[230px] md:w-[260px]" />
+        </div>
+        <div class="relative z-40 mt-auto w-full">
+            <div class="mx-auto flex w-[88%] max-w-[1280px] flex-col items-center justify-center gap-6 px-4 pt-6 pb-10 text-white sm:w-[86%] sm:px-5 md:w-[84%] md:px-8 md:pt-6 md:pb-16 lg:w-[70%] min-[1240px]:flex-row min-[1240px]:items-center min-[1240px]:gap-16 min-[1290px]:w-[70%]">
+                <div class="shrink-0">
+                    <img src="assets/7_days.png" alt="7 days" class="h-auto w-[110px] max-w-[50vw] sm:w-[140px] md:w-[170px] lg:w-[190px] min-[1280px]:w-[170px]" />
+                </div>
+                <div class="hidden h-[170px] w-px bg-white min-[1240px]:block"></div>
+                <div class="max-w-[760px] text-center min-[1240px]:text-left">
+                    <p class="text-[16px] leading-relaxed text-white/90">
+                        IFFD unites visionary filmmakers, industry leaders, and discerning audiences in a carefully curated celebration of storytelling. Set against the monumental backdrop of India's political and cultural capital, Delhi, the festival sparks a multitude of stories and dynamic conversations - all through cinema.
+                    </p>
+                    <p class="mt-3 text-xl leading-none tracking-[0.35em] text-white/80">..........................</p>
+                    <h3 class="mt-3 text-2xl leading-tight md:text-3xl">
+                        <span class="italic font-light">THIS IS BEYOND VOLUME.</span><br />
+                        <span class="italic font-bold uppercase">This is vision.</span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function initHeroDots() {
+            const dots = Array.from(document.querySelectorAll(".hero-dot"));
+            if (!dots.length) {
+                return;
+            }
+
+            const colorPalette = ["#e75a93", "#5cbca9", "#65a556", "#ffffff", "#313c40"];
+            const columns = 3;
+            const rows = 9;
+
+            const pickColor = (blockedColors) => {
+                const available = colorPalette.filter((color) => !blockedColors.includes(color));
+                if (!available.length) {
+                    return colorPalette[Math.floor(Math.random() * colorPalette.length)];
+                }
+                return available[Math.floor(Math.random() * available.length)];
+            };
+
+            const updateDots = () => {
+                for (let row = 0; row < rows; row += 1) {
+                    let prevColorInRow = "";
+
+                    for (let col = 0; col < columns; col += 1) {
+                        const dotIndex = row * columns + col;
+                        const dot = dots[dotIndex];
+                        if (!dot) {
+                            continue;
+                        }
+
+                        const currentColor = dot.dataset.color || "";
+                        const nextColor = pickColor([currentColor, prevColorInRow]);
+                        dot.style.backgroundColor = nextColor;
+                        dot.dataset.color = nextColor;
+                        prevColorInRow = nextColor;
+                    }
+                }
+            };
+
+            updateDots();
+            setInterval(updateDots, 650);
+        }
+
+        function initHeroParallax() {
+            const heroSection = document.getElementById("hero-section");
+            const leftDecor = document.getElementById("hero-left-decor");
+            const rightDecor = document.getElementById("hero-right-decor");
+            if (!heroSection) {
+                return;
+            }
+
+            if (window.matchMedia("(max-width: 767px)").matches) {
+                heroSection.style.backgroundPosition = "center center";
+                if (leftDecor) {
+                    leftDecor.style.transform = "";
+                }
+                if (rightDecor) {
+                    rightDecor.style.transform = "";
+                }
+                return;
+            }
+
+            if (heroSection.dataset.parallaxInit === "true") {
+                return;
+            }
+            heroSection.dataset.parallaxInit = "true";
+
+            const heroStartY = window.scrollY + heroSection.getBoundingClientRect().top;
+            let ticking = false;
+
+            heroSection.style.willChange = "background-position";
+            if (leftDecor) {
+                leftDecor.style.willChange = "transform";
+            }
+            if (rightDecor) {
+                rightDecor.style.willChange = "transform";
+            }
+
+            const updateParallax = () => {
+                const rect = heroSection.getBoundingClientRect();
+                const viewportHeight = window.innerHeight || 0;
+                const isVisible = rect.bottom > 0 && rect.top < viewportHeight;
+
+                if (isVisible) {
+                    const scrollDelta = window.scrollY - heroStartY;
+                    const bgOffset = Math.max(-160, Math.min(160, scrollDelta * 0.22));
+                    const leftOffset = Math.max(-100, Math.min(100, scrollDelta * 0.14));
+                    const rightOffset = Math.max(-120, Math.min(120, scrollDelta * -0.17));
+
+                    heroSection.style.backgroundPosition = `center calc(50% + ${bgOffset}px)`;
+
+                    if (leftDecor) {
+                        leftDecor.style.transform = `translate3d(0, ${leftOffset}px, 0)`;
+                    }
+
+                    if (rightDecor) {
+                        rightDecor.style.transform = `translate3d(0, ${rightOffset}px, 0)`;
+                    }
+                }
+
+                ticking = false;
+            };
+
+            const requestParallax = () => {
+                if (ticking) {
+                    return;
+                }
+                ticking = true;
+                window.requestAnimationFrame(updateParallax);
+            };
+
+            window.addEventListener("scroll", requestParallax, { passive: true });
+            window.addEventListener("resize", requestParallax);
+            requestParallax();
+        }
+
+        function initHeaderInteractions() {
+            const menuToggle = document.getElementById("menu-toggle");
+            const menuClose = document.getElementById("menu-close");
+            const overlay = document.getElementById("mobile-menu-overlay");
+            const drawer = document.getElementById("mobile-menu-drawer");
+            const moreToggle = document.getElementById("more-toggle");
+            const moreMenu = document.getElementById("more-menu");
+            const moreArrow = document.getElementById("more-arrow");
+            const desktopMoreToggle = document.getElementById("desktop-more-toggle");
+            const desktopMoreMenu = document.getElementById("desktop-more-menu");
+            const desktopMoreArrow = document.getElementById("desktop-more-arrow");
+
+            if (!menuToggle || !overlay || !drawer) {
+                return;
+            }
+
+            const openMenu = () => {
+                drawer.classList.remove("translate-x-full");
+                overlay.classList.remove("hidden");
+                document.body.classList.add("overflow-hidden");
+            };
+
+            const closeMenu = () => {
+                drawer.classList.add("translate-x-full");
+                overlay.classList.add("hidden");
+                document.body.classList.remove("overflow-hidden");
+            };
+
+            menuToggle.addEventListener("click", openMenu);
+            if (menuClose) {
+                menuClose.addEventListener("click", closeMenu);
+            }
+            overlay.addEventListener("click", closeMenu);
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape") {
+                    closeMenu();
+                }
+            });
+
+            const desktopMediaQuery = window.matchMedia("(min-width: 1024px)");
+            desktopMediaQuery.addEventListener("change", (event) => {
+                if (event.matches) {
+                    closeMenu();
+                }
+            });
+
+            if (moreToggle && moreMenu && moreArrow) {
+                moreToggle.addEventListener("click", () => {
+                    moreMenu.classList.toggle("hidden");
+                    moreArrow.classList.toggle("rotate-180");
+                });
+            }
+
+            if (desktopMoreToggle && desktopMoreMenu && desktopMoreArrow) {
+                const toggleDesktopMore = () => {
+                    desktopMoreMenu.classList.toggle("hidden");
+                    desktopMoreArrow.classList.toggle("rotate-180");
+                };
+
+                desktopMoreToggle.addEventListener("click", (event) => {
+                    event.stopPropagation();
+                    toggleDesktopMore();
+                });
+
+                document.addEventListener("click", (event) => {
+                    if (!desktopMoreMenu.contains(event.target) && !desktopMoreToggle.contains(event.target)) {
+                        desktopMoreMenu.classList.add("hidden");
+                        desktopMoreArrow.classList.remove("rotate-180");
+                    }
+                });
+            }
+        }
+
+        initHeaderInteractions();
+        initHeroDots();
+        initHeroParallax();
+    </script>
+</body>
+</html>
