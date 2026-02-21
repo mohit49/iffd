@@ -22,6 +22,32 @@
             font-family: "Open Sans", sans-serif;
         }
 
+        .scrollbar-hide {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scroll-fade-left,
+        .scroll-fade-right {
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 48px;
+            z-index: 1;
+        }
+        .scroll-fade-left {
+            left: 0;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.95), transparent);
+        }
+        .scroll-fade-right {
+            right: 0;
+            background: linear-gradient(to left, rgba(255, 255, 255, 0.95), transparent);
+        }
+
         @keyframes heroFadeIn {
             from {
                 opacity: 0;
@@ -31,6 +57,37 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        @keyframes heroSlidePopLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px) scale(0.75);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+        @keyframes heroSlidePopRight {
+            from {
+                opacity: 0;
+                transform: translateX(80px) scale(0.75);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+        .hero-slide-pop-left {
+            opacity: 0;
+            transform-origin: left center;
+            animation: heroSlidePopLeft 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        .hero-slide-pop-right {
+            opacity: 0;
+            transform-origin: right center;
+            animation: heroSlidePopRight 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) 0.12s forwards;
         }
 
         .hero-poster {
@@ -66,55 +123,165 @@
             animation: filmRoll 18s linear infinite reverse;
             transform-origin: center;
         }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-48px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+            transition-delay: var(--reveal-delay, 0ms);
+        }
+
+        .reveal-left.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+            transition-delay: var(--reveal-delay, 0ms);
+        }
+
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-slide-pop-left {
+            opacity: 0;
+            transform: translateX(-56px) scale(0.88);
+            transition: opacity 0.65s ease-out, transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition-delay: var(--reveal-delay, 0ms);
+        }
+        .reveal-slide-pop-left.is-visible {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+        .reveal-slide-pop-right {
+            opacity: 0;
+            transform: translateX(56px) scale(0.88);
+            transition: opacity 0.65s ease-out, transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition-delay: var(--reveal-delay, 0ms);
+        }
+        .reveal-slide-pop-right.is-visible {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+
+        @keyframes starPulse {
+            0% {
+                opacity: 0.35;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.35;
+            }
+        }
+
+        .star-strip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow: hidden;
+            min-height: 40px;
+        }
+
+        .star-item {
+            width: 22px;
+            height: 22px;
+            flex: 0 0 auto;
+            opacity: 0.5;
+            animation-name: starPulse;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        .nav-hover-nav {
+            position: relative;
+        }
+
+        .nav-hover-indicator {
+            position: absolute;
+            border-radius: 0;
+            background-color: #ea5183;
+            opacity: 0;
+            pointer-events: none;
+            transition: left 0.28s ease, top 0.28s ease, width 0.28s ease, height 0.28s ease, opacity 0.2s ease;
+            will-change: left, top, width, height, opacity;
+            z-index: 0;
+        }
+
+        .nav-hover-link {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            min-height: 100%;
+        }
+
+        .nav-hover-link.is-active {
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="bg-[#030303]">
-        <div class="relative mx-auto flex w-[90%] items-center justify-between py-3">
-            <a href="#" class="shrink-0">
-                <img src="assets/logo.jpg" alt="IFFD Logo" class="h-[100px] w-auto" />
+    <header class="bg-white">
+        <div class="relative mx-auto flex h-[100px] w-[90%] items-center justify-between">
+            <a href="#" class="shrink-0 self-stretch">
+                <img src="assets/logo.jpg" alt="IFFD Logo" class="h-full w-auto object-contain" />
             </a>
 
-            <nav class="ml-8 hidden items-center justify-end gap-x-5 text-[14px] font-medium text-white min-[1481px]:flex">
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">About Us</a>
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Festival Schedule &amp; guide</a>
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Film Selection</a>
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">CineXchange</a>
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">CineVerse Expo</a>
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Masterclasses</a>
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Workshops/Live Demos</a>
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Registrations</a>
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">FAQ</a>
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">MEDIA</a>
+            <nav
+                id="desktop-full-nav"
+                class="nav-hover-nav relative ml-6 hidden h-full items-center justify-center gap-x-5 px-6 text-[14px] font-medium text-black min-[1481px]:flex"
+            >
+                <span class="nav-hover-indicator"></span>
+                <a href="#" data-default-active="true" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">About Us</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Festival Schedule &amp; guide</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Film Selection</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineXchange</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineVerse Expo</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Masterclasses</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Workshops/Live Demos</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Registrations</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">FAQ</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">MEDIA</a>
             </nav>
 
-            <nav class="ml-8 hidden items-center justify-end gap-x-5 text-[14px] font-medium text-white min-[1024px]:flex min-[1481px]:hidden">
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">About Us</a>
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Festival Schedule &amp; guide</a>
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">Film Selection</a>
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">CineXchange</a>
-                <a href="#" class="whitespace-nowrap transition hover:text-gray-300">CineVerse Expo</a>
+            <nav
+                id="desktop-compact-nav"
+                class="nav-hover-nav ml-6 hidden h-full items-center justify-center gap-x-5 px-6 text-[14px] font-medium text-black min-[1024px]:flex min-[1481px]:hidden"
+            >
+                <span class="nav-hover-indicator"></span>
+                <a href="#" data-default-active="true" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">About Us</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Festival Schedule &amp; guide</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Film Selection</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineXchange</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineVerse Expo</a>
                 <div class="relative">
-                    <button id="desktop-more-toggle" class="flex items-center gap-2 transition hover:text-gray-300" type="button">
+                    <button id="desktop-more-toggle" class="nav-hover-link flex h-full items-center gap-2 px-2 transition hover:text-white" type="button">
                         <span>More</span>
                         <svg id="desktop-more-arrow" class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.51a.75.75 0 01-1.08 0l-4.25-4.51a.75.75 0 01.02-1.06z" clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                    <div id="desktop-more-menu" class="absolute right-0 top-full z-30 mt-3 hidden min-w-[220px] rounded border border-white/10 bg-[#111111] p-3 text-[14px] shadow-lg">
-                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-300">Masterclasses</a>
-                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-300">Workshops/Live Demos</a>
-                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-300">Registrations</a>
-                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-300">FAQ</a>
-                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-300">MEDIA</a>
+                    <div id="desktop-more-menu" class="absolute right-0 top-full z-30 mt-3 hidden min-w-[220px] rounded border border-black/10 bg-white p-3 text-[14px] text-black shadow-lg">
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">Masterclasses</a>
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">Workshops/Live Demos</a>
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">Registrations</a>
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">FAQ</a>
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">MEDIA</a>
                     </div>
                 </div>
             </nav>
 
             <button
                 id="menu-toggle"
-                class="inline-flex h-10 w-10 items-center justify-center rounded border border-white/20 text-white transition hover:bg-white/10 lg:hidden"
+                class="inline-flex h-10 w-10 items-center justify-center rounded border border-black/20 text-black transition hover:bg-black/5 lg:hidden"
                 aria-label="Open menu"
                 type="button"
             >
@@ -139,14 +306,14 @@
         <div id="mobile-menu-overlay" class="fixed inset-0 z-[999] hidden bg-black/60 lg:hidden"></div>
         <aside
             id="mobile-menu-drawer"
-            class="fixed right-0 top-0 z-[1000] h-full w-[320px] max-w-[85vw] translate-x-full overflow-y-auto bg-[#111111] p-6 text-white transition-transform duration-300 ease-in-out lg:hidden"
+            class="fixed right-0 top-0 z-[1000] h-full w-[320px] max-w-[85vw] translate-x-full overflow-y-auto bg-white p-6 text-black transition-transform duration-300 ease-in-out lg:hidden"
             aria-label="Mobile menu"
         >
             <div class="flex items-center justify-between">
-                <span class="text-[14px] font-semibold uppercase tracking-wide text-white/70">Menu</span>
+                <span class="text-[14px] font-semibold uppercase tracking-wide text-black/70">Menu</span>
                 <button
                     id="menu-close"
-                    class="inline-flex h-9 w-9 items-center justify-center rounded border border-white/20 transition hover:bg-white/10"
+                    class="inline-flex h-9 w-9 items-center justify-center rounded border border-black/20 transition hover:bg-black/5"
                     aria-label="Close menu"
                     type="button"
                 >
@@ -156,17 +323,17 @@
                 </button>
             </div>
 
-            <nav id="mobile-menu-links" class="mt-8 flex flex-col gap-4 text-[14px] font-medium text-white">
-                <a href="#" class="block text-white transition hover:text-gray-300">About Us</a>
-                <a href="#" class="block text-white transition hover:text-gray-300">Festival Schedule &amp; guide</a>
-                <a href="#" class="block text-white transition hover:text-gray-300">Film Selection</a>
-                <a href="#" class="block text-white transition hover:text-gray-300">CineXchange</a>
-                <a href="#" class="block text-white transition hover:text-gray-300">CineVerse Expo</a>
-                <a href="#" class="block text-white transition hover:text-gray-300">Masterclasses</a>
-                <a href="#" class="block text-white transition hover:text-gray-300">Workshops/Live Demos</a>
-                <a href="#" class="block text-white transition hover:text-gray-300">Registrations</a>
-                <a href="#" class="block text-white transition hover:text-gray-300">FAQ</a>
-                <a href="#" class="block text-white transition hover:text-gray-300">MEDIA</a>
+            <nav id="mobile-menu-links" class="mt-8 flex flex-col gap-4 text-[14px] font-medium text-black">
+                <a href="#" class="block text-black transition hover:text-gray-700">About Us</a>
+                <a href="#" class="block text-black transition hover:text-gray-700">Festival Schedule &amp; guide</a>
+                <a href="#" class="block text-black transition hover:text-gray-700">Film Selection</a>
+                <a href="#" class="block text-black transition hover:text-gray-700">CineXchange</a>
+                <a href="#" class="block text-black transition hover:text-gray-700">CineVerse Expo</a>
+                <a href="#" class="block text-black transition hover:text-gray-700">Masterclasses</a>
+                <a href="#" class="block text-black transition hover:text-gray-700">Workshops/Live Demos</a>
+                <a href="#" class="block text-black transition hover:text-gray-700">Registrations</a>
+                <a href="#" class="block text-black transition hover:text-gray-700">FAQ</a>
+                <a href="#" class="block text-black transition hover:text-gray-700">MEDIA</a>
             </nav>
         </aside>
     </header>
@@ -175,11 +342,11 @@
     <!-- Hero Section -->
     <section
         id="hero-section"
-        class="relative flex min-h-[1000px] flex-col overflow-hidden bg-cover bg-center h-auto md:h-[900px] lg:h-[960px] min-[1240px]:h-auto"
+        class="relative flex min-h-[1200px] flex-col overflow-hidden bg-cover bg-center h-auto md:h-[900px] lg:h-[960px] min-[1240px]:h-auto"
         style="background-image: url('assets/main-sec.jpg');"
     >
         <div id="hero-left-scale" class="absolute left-0 top-6 origin-left scale-[0.52] sm:scale-[0.68] md:top-1/2 md:scale-[0.82] lg:scale-100">
-            <div id="hero-left-decor">
+            <div id="hero-left-decor" class="hero-slide-pop-left">
                 <div class="flex flex-col items-start md:-translate-y-1/2">
                     <div id="hero-dots">
                         <div class="grid grid-cols-3 gap-2">
@@ -221,7 +388,7 @@
             </div>
         </div>
         <div id="hero-right-scale" class="pointer-events-none absolute inset-0 origin-top-right scale-[0.58] sm:scale-[0.66] md:scale-[0.76] lg:scale-[0.88] xl:scale-100">
-            <div id="hero-right-decor" class="relative h-full w-full">
+            <div id="hero-right-decor" class="hero-slide-pop-right relative h-full w-full">
                 <img
                     src="assets/circle-film.png"
                     alt="Film reel decoration"
@@ -259,8 +426,8 @@
                 />
             </div>
         </div>
-        <div class="mx-auto flex w-full justify-center pt-6 md:pt-8">
-            <img src="assets/View-Film.png" alt="View Film" class="hero-poster h-auto w-[190px] max-w-[80%] sm:w-[230px] md:w-[260px]" />
+        <div class="mx-auto flex w-full justify-center pt-24 md:pt-30">
+            <img src="assets/View-Film.png" alt="View Film" class="hero-poster h-auto w-[250px] max-w-[86%] sm:w-[290px] md:w-[340px] lg:w-[370px]" />
         </div>
         <div class="relative z-40 mt-auto w-full">
             <div class="mx-auto flex w-[88%] max-w-[1280px] flex-col items-center justify-center gap-6 px-4 pt-6 pb-10 text-white sm:w-[86%] sm:px-5 md:w-[84%] md:px-8 md:pt-6 md:pb-16 lg:w-[70%] min-[1240px]:flex-row min-[1240px]:items-center min-[1240px]:gap-16 min-[1290px]:w-[70%]">
@@ -282,199 +449,339 @@
         </div>
     </section>
 
-    <script>
-        function initHeroDots() {
-            const dots = Array.from(document.querySelectorAll(".hero-dot"));
-            if (!dots.length) {
-                return;
-            }
+    <section class="bg-white py-[60px]">
+        <div class="mx-auto w-[90%] max-w-[1280px]">
+            <div class="flex flex-col items-start gap-10 lg:flex-row lg:items-start lg:gap-16">
+                <div class="w-full lg:w-[65%]">
+                    <h2 class="reveal-up text-[36px] font-bold leading-tight md:text-[45px]" style="--reveal-delay: 60ms;">
+                        <span class="text-black">About </span><span class="text-[#ea5183]">IFFD</span>
+                    </h2>
+                    <p class="reveal-up mt-6 text-[16px] font-medium leading-relaxed text-black/70" style="--reveal-delay: 140ms;">
+                        The International Film Festival (IFFD) is a flagship initiative envisioned under the Delhi Film Policy, aimed at positioning Delhi as a vibrant global hub for cinema, cultural exchange, and storytelling. Conceived as an international celebration of films and filmmaking, IFFD seeks to spotlight cinematic excellence while fostering meaningful cultural and industry collaborations across borders.
+                    </p>
+                    <button
+                        type="button"
+                        class="reveal-up mt-8 inline-flex items-center justify-center rounded-[8px] border-2 border-[#ea5183] px-12 py-4 text-[18px] font-semibold uppercase tracking-wide text-[#ea5183] transition hover:bg-[#ea5183] hover:text-white"
+                        style="--reveal-delay: 220ms;"
+                    >
+                        READ MORE
+                    </button>
+                </div>
+                <div class="w-full lg:w-[35%]">
+                    <div class="reveal-up relative mx-auto w-full max-w-[420px] lg:mx-0" style="--reveal-delay: 120ms;">
+                        <img src="assets/bharat-madpam.png" alt="Bharat Mandapam" class="h-auto w-full rounded-[8px] object-cover" />
+                        <div
+                            class="reveal-left absolute bottom-4 -left-[20%] w-[90%] rounded-[8px] bg-[#ffffff] px-5 py-4 text-black shadow-lg sm:-left-[15%] sm:w-[82%]"
+                        >
+                            <p class="text-right text-[18px] font-semibold italic leading-snug">
+                                Venue:<br />
+                                Bharat Mandapam, Pragati Maidan,<br />
+                                New Delhi
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            const colorPalette = ["#e75a93", "#5cbca9", "#65a556", "#ffffff", "#313c40"];
-            const columns = 3;
-            const rows = 9;
+    <section class="bg-white py-[60px]">
+        <div class="mx-auto w-[90%] max-w-[1280px]">
+            <div class="mx-auto max-w-[980px] text-center">
+                <h2 class="reveal-up text-[34px] font-bold leading-tight md:text-[45px]" style="--reveal-delay: 60ms;">
+                    <span class="text-black">List of </span><span class="text-[#ea5183]">Categories</span>
+                </h2>
+                <p class="reveal-up mt-5 text-[16px] leading-relaxed text-black/70 md:text-[20px]" style="--reveal-delay: 140ms;">
+                    The festival showcases a curated selection, which celebrates new perspectives and innovations in regional and world cinema. It also offers an indepth exploration of other audio visual formats of story telling.
+                </p>
+            </div>
 
-            const pickColor = (blockedColors) => {
-                const available = colorPalette.filter((color) => !blockedColors.includes(color));
-                if (!available.length) {
-                    return colorPalette[Math.floor(Math.random() * colorPalette.length)];
-                }
-                return available[Math.floor(Math.random() * available.length)];
-            };
+            <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+                <img src="assets/feature-film.png" alt="Feature Film Category" class="reveal-up h-auto w-full rounded-[8px] object-cover" style="--reveal-delay: 90ms;" />
+                <img src="assets/non-feature-film.png" alt="Non-Feature Film Category" class="reveal-up h-auto w-full rounded-[8px] object-cover" style="--reveal-delay: 170ms;" />
+            </div>
 
-            const updateDots = () => {
-                for (let row = 0; row < rows; row += 1) {
-                    let prevColorInRow = "";
+            <h3 class="reveal-up mt-10 text-center text-[30px] font-bold text-black md:text-[38px]" style="--reveal-delay: 120ms;">Film Packages</h3>
+            <div class="reveal-up mt-6 overflow-x-auto pb-2 md:overflow-visible md:pb-0" style="--reveal-delay: 200ms;">
+                <img
+                    src="assets/three-col-bg.png"
+                    alt="Film Packages"
+                    class="h-auto min-w-[900px] rounded-[8px] object-contain md:min-w-0 md:w-full"
+                />
+            </div>
+        </div>
+    </section>
 
-                    for (let col = 0; col < columns; col += 1) {
-                        const dotIndex = row * columns + col;
-                        const dot = dots[dotIndex];
-                        if (!dot) {
-                            continue;
-                        }
+    <section class="bg-white py-[60px]">
+        <div class="mx-auto w-[90%] max-w-[1280px]">
+            <h2 class="reveal-up text-center text-[34px] font-bold leading-tight md:text-[45px]" style="--reveal-delay: 60ms;">
+                <span class="text-black">Submitted </span><span class="text-[#ea5183]">Films</span>
+            </h2>
 
-                        const currentColor = dot.dataset.color || "";
-                        const nextColor = pickColor([currentColor, prevColorInRow]);
-                        dot.style.backgroundColor = nextColor;
-                        dot.dataset.color = nextColor;
-                        prevColorInRow = nextColor;
-                    }
-                }
-            };
+            <div class="mt-10 flex flex-col gap-8 lg:flex-row lg:items-stretch lg:gap-10">
+                <div class="w-full lg:w-[60%]">
+                    <img src="assets/submitted-film.png" alt="Submitted Films" class="reveal-up h-full w-full rounded-[8px] object-cover" style="--reveal-delay: 120ms;" />
+                </div>
 
-            updateDots();
-            setInterval(updateDots, 650);
-        }
+                <div class="w-full space-y-4 lg:w-[40%]">
+                    <div class="reveal-up rounded-[8px] bg-[#ea5183] px-6 py-5 text-center text-white" style="--reveal-delay: 90ms;">
+                        <p class="text-[42px] font-bold leading-none">802</p>
+                        <p class="mt-2 text-[16px] font-bold text-white">Non-Feature Film (International)</p>
+                    </div>
 
-        function initHeroParallax() {
-            const heroSection = document.getElementById("hero-section");
-            const leftDecor = document.getElementById("hero-left-decor");
-            const rightDecor = document.getElementById("hero-right-decor");
-            if (!heroSection) {
-                return;
-            }
+                    <div class="reveal-up rounded-[8px] bg-[#f7bb37] px-6 py-5 text-center text-white" style="--reveal-delay: 140ms;">
+                        <p class="text-[42px] font-bold leading-none">509</p>
+                        <p class="mt-2 text-[16px] font-bold text-white">Non-Feature Film (India)</p>
+                    </div>
 
-            if (window.matchMedia("(max-width: 767px)").matches) {
-                heroSection.style.backgroundPosition = "center center";
-                if (leftDecor) {
-                    leftDecor.style.transform = "";
-                }
-                if (rightDecor) {
-                    rightDecor.style.transform = "";
-                }
-                return;
-            }
+                    <div class="reveal-up rounded-[8px] bg-[#5cbdaa] px-6 py-5 text-center text-white" style="--reveal-delay: 190ms;">
+                        <p class="text-[42px] font-bold leading-none">162</p>
+                        <p class="mt-2 text-[16px] font-bold text-white">Feature Film (International)</p>
+                    </div>
 
-            if (heroSection.dataset.parallaxInit === "true") {
-                return;
-            }
-            heroSection.dataset.parallaxInit = "true";
+                    <div class="reveal-up rounded-[8px] bg-[#65a656] px-6 py-5 text-center text-white" style="--reveal-delay: 240ms;">
+                        <p class="text-[42px] font-bold leading-none">115</p>
+                        <p class="mt-2 text-[16px] font-bold text-white">Feature Film (India)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            const heroStartY = window.scrollY + heroSection.getBoundingClientRect().top;
-            let ticking = false;
+    <section class="bg-white pb-16 md:pb-20">
+        <div class="mx-auto mt-10 w-[90%] max-w-[1280px] md:mt-12">
+            <div id="star-strip" class="star-strip mt-3 w-full" aria-label="Star border"></div>
 
-            heroSection.style.willChange = "background-position";
-            if (leftDecor) {
-                leftDecor.style.willChange = "transform";
-            }
-            if (rightDecor) {
-                rightDecor.style.willChange = "transform";
-            }
+         
+        </div>
+        <!-- Full-width row: left column starts with same gap as section container -->
+        <div class="mt-12 w-full lg:mt-16">
+            <div class="flex flex-col gap-8 pl-[max(5%,calc((100vw-1280px)/2))] lg:flex-row lg:items-stretch lg:gap-10">
+                <div class="w-full lg:w-[30%]">
+                    <div class="flex flex-col gap-8 lg:items-stretch">
+                        <div class="w-full">
+                            <img src="assets/gala-prem.png" alt="Gala Premieres" class="h-auto w-full max-w-[240px] object-contain lg:max-w-[280px]" />
+                        </div>
+                        <div class="w-full">
+                            <div class="flex flex-col justify-center">
+                                <p class="text-[20px] leading-relaxed text-[#333]">
+                                    The Gala Premieres at the festival spotlight first-time screenings of standout films. They mark the flagship moments of the festival, bringing together creators and audiences in celebration of cinematic achievement.
+                                </p>
+                                <h3 class="mt-6 font-sans text-[40px] italic leading-tight text-[#333]" style="font-family: 'Open Sans', sans-serif;">
+                                    EXCITING GALAS.<br />
+                                    <span class="font-bold">ICONIC MOMENTS.</span>
+                                </h3>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="relative h-[320px] w-full lg:h-auto lg:min-h-0 lg:w-[70%] lg:flex-1">
+                    <div class="scroll-fade-left" aria-hidden="true"></div>
+                    <div class="scroll-fade-right" aria-hidden="true"></div>
+                    <div class="scrollbar-hide flex h-full w-full overflow-x-auto">
+                        <div class="flex h-full gap-5 lg:gap-6">
+                            <img src="assets/ls-3.png" alt="Gala film" class="reveal-left h-full min-w-[140px] shrink-0 rounded-lg object-cover lg:min-w-[160px]" style="--reveal-delay: 0ms;" />
+                            <img src="assets/ls-4.png" alt="Gala film" class="reveal-left h-full min-w-[140px] shrink-0 rounded-lg object-cover lg:min-w-[160px]" style="--reveal-delay: 120ms;" />
+                            <img src="assets/sl1.png" alt="Gala film" class="reveal-left h-full min-w-[140px] shrink-0 rounded-lg object-cover lg:min-w-[160px]" style="--reveal-delay: 240ms;" />
+                            <img src="assets/sl2.png" alt="Gala film" class="reveal-left h-full min-w-[140px] shrink-0 rounded-lg object-cover lg:min-w-[160px]" style="--reveal-delay: 360ms;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mx-auto mt-16 w-[90%] max-w-[1280px] md:mt-20">
+            <div id="star-strip2" class="star-strip mt-3 w-full" aria-label="Star border"></div>
 
-            const updateParallax = () => {
-                const rect = heroSection.getBoundingClientRect();
-                const viewportHeight = window.innerHeight || 0;
-                const isVisible = rect.bottom > 0 && rect.top < viewportHeight;
+         
+        </div>
+    </section>
 
-                if (isVisible) {
-                    const scrollDelta = window.scrollY - heroStartY;
-                    const bgOffset = Math.max(-160, Math.min(160, scrollDelta * 0.22));
-                    const leftOffset = Math.max(-100, Math.min(100, scrollDelta * 0.14));
-                    const rightOffset = Math.max(-120, Math.min(120, scrollDelta * -0.17));
+    <section class="bg-white py-16 md:py-20">
+        <div class="mx-auto w-[90%] max-w-[1280px]">
+            <div class="relative w-full rounded-[8px] border-[5px] border-[#e62877] p-8 pb-20 md:p-10 md:pb-24">
+                <div class="reveal-up flex flex-wrap items-center justify-center gap-4" style="--reveal-delay: 0ms;">
+                    <img src="assets/aro.png" alt="" class="h-8 w-auto shrink-0 scale-x-[-1] md:h-10" aria-hidden="true" />
+                    <h2 class="text-center text-[28px] font-bold leading-tight text-black md:text-[36px]">
+                        Why You Should Attend <span class="text-[#e62877]">IFFD.</span>
+                    </h2>
+                    <img src="assets/aro.png" alt="" class="h-8 w-auto shrink-0 md:h-10" aria-hidden="true" />
+                </div>
+                <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="reveal-up rounded-[8px] border border-dashed border-black px-6 py-8" style="--reveal-delay: 80ms;">
+                        <h3 class="text-center text-[20px] font-bold uppercase leading-tight text-[#e62877] md:text-[22px]">Prestige Platform</h3>
+                        <p class="mt-4 text-center text-[16px] leading-relaxed text-[#333] md:text-[17px]">Curated, non-competitive international festival celebrating cinematic excellence.</p>
+                    </div>
+                    <div class="reveal-up rounded-[8px] border border-dashed border-black px-6 py-8" style="--reveal-delay: 160ms;">
+                        <h3 class="text-center text-[20px] font-bold uppercase leading-tight text-[#65a656] md:text-[22px]">Premium Screenings</h3>
+                        <p class="mt-4 text-center text-[16px] leading-relaxed text-[#333] md:text-[17px]">Iconic venues and public spaces in a city alive with cinephiles.</p>
+                    </div>
+                    <div class="reveal-up rounded-[8px] border border-dashed border-black px-6 py-8" style="--reveal-delay: 240ms;">
+                        <h3 class="text-center text-[20px] font-bold uppercase leading-tight text-[#f8bc36] md:text-[22px]">Audience Engagement</h3>
+                        <p class="mt-4 text-center text-[16px] leading-relaxed text-[#333] md:text-[17px]">Direct dialogue with engaged audiences, critics, and cultural voices.</p>
+                    </div>
+                    <div class="reveal-up rounded-[8px] border border-dashed border-black px-6 py-8" style="--reveal-delay: 320ms;">
+                        <h3 class="text-center text-[20px] font-bold uppercase leading-tight text-[#5cbdaa] md:text-[22px]">Industry Opportunities</h3>
+                        <p class="mt-4 text-center text-[16px] leading-relaxed text-[#333] md:text-[17px]">CineXchange pitch sessions and curated networking for meaningful collaboration.</p>
+                    </div>
+                    <div class="reveal-up rounded-[8px] border border-dashed border-black px-6 py-8 sm:col-span-2 lg:col-span-1" style="--reveal-delay: 400ms;">
+                        <h3 class="text-center text-[20px] font-bold uppercase leading-tight text-[#f66939] md:text-[22px]">Future-Facing Ecosystem</h3>
+                        <p class="mt-4 text-center text-[16px] leading-relaxed text-[#333] md:text-[17px]">A platform embracing new cinematic forms and evolving technologies.</p>
+                    </div>
+                </div>
+                <img src="assets/video-reel.png" alt="" class="reveal-left absolute bottom-0 right-0 h-[130px] w-auto object-contain object-right-bottom md:h-[160px] lg:h-[190px]" style="--reveal-delay: 480ms;" aria-hidden="true" />
+            </div>
+        </div>
+    </section>
 
-                    heroSection.style.backgroundPosition = `center calc(50% + ${bgOffset}px)`;
+    <section class="bg-white py-16 md:py-20">
+        <div class="mx-auto w-[90%] max-w-[1280px]">
+            <div class="flex flex-col gap-8 lg:flex-row lg:items-stretch lg:gap-10">
+                <div class="w-full shrink-0 lg:w-[30%]">
+                    <img src="assets/taj-mahal.png" alt="Delhi Film Policy" class="reveal-left h-auto w-full rounded-[8px] object-cover" style="--reveal-delay: 0ms;" />
+                </div>
+                <div class="flex flex-col justify-center lg:w-[70%]">
+                    <h2 class="reveal-up text-[28px] font-bold leading-tight text-black md:text-[36px]" style="--reveal-delay: 80ms;">
+                        Delhi Film Policy — <span class="text-[#ea5183]">e-Film Clearance</span>
+                    </h2>
+                    <p class="reveal-up mt-6 text-[18px] leading-relaxed text-[#333]" style="--reveal-delay: 160ms;">
+                        Delhi has, for decades, been the choice of destination for film-makers opting for locales that add an element of timeless beauty and character to their works. This ancient city has been immortalized in countless movies. The Delhi Film Policy is an initiative to promote film shooting in the city's. Delhi Tourism is the nodal agency for the facilitation of film shooting in Delhi.
+                    </p>
+                    <h3 class="reveal-up mt-8 text-[22px] font-bold text-black md:text-[24px]" style="--reveal-delay: 240ms;">The Delhi Film Policy aims at:</h3>
+                    <div class="mt-4 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:items-center">
+                        <ul class="reveal-up list-inside list-disc space-y-2 pl-6 text-left text-[16px] leading-relaxed text-[#333] [&::marker]:text-[#ea5183]" style="--reveal-delay: 320ms;">
+                            <li>Streamlining approvals</li>
+                            <li>Supporting creativity, talent, and tourism</li>
+                            <li>Single-window digital approvals via ‘e-Film Clearance’</li>
+                        </ul>
+                        <ul class="reveal-up list-inside list-disc space-y-2 pl-6 text-left text-[16px] leading-relaxed text-[#333] [&::marker]:text-[#ea5183]" style="--reveal-delay: 400ms;">
+                            <li>Transparent access for stakeholders and authorities</li>
+                            <li>Automated communication notifications</li>
+                            <li>Instant application acknowledgments</li>
+                        </ul>
+                    </div>
+                    <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:items-center">
+                        <div class="reveal-up min-w-0 text-left" style="--reveal-delay: 480ms;">
+                            <h4 class="text-[18px] font-bold text-black md:text-[20px]">Shooting Locations In Delhi</h4>
+                            <a href="https://www.delhitourism.gov.in/dt/efilm/ShootingAreas/index.html" target="_blank" rel="noopener noreferrer" class="mt-2 block max-w-full break-all text-[16px] font-medium text-[#ea5183] underline decoration-[#ea5183] underline-offset-2 hover:opacity-90">https://www.delhitourism.gov.in/dt/efilm/ShootingAreas/index.html</a>
+                        </div>
+                        <div class="reveal-up min-w-0 text-left" style="--reveal-delay: 560ms;">
+                            <h4 class="text-[18px] font-bold text-black md:text-[20px]">e-Film Clearance</h4>
+                            <a href="https://www.delhitourism.gov.in/dt/efilm/index.html" target="_blank" rel="noopener noreferrer" class="mt-2 block max-w-full break-all text-[16px] font-medium text-[#ea5183] underline decoration-[#ea5183] underline-offset-2 hover:opacity-90">https://www.delhitourism.gov.in/dt/efilm/index.html</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    if (leftDecor) {
-                        leftDecor.style.transform = `translate3d(0, ${leftOffset}px, 0)`;
-                    }
+    <section class="bg-white py-16 md:py-20">
+        <div class="mx-auto w-[90%] max-w-[1280px]">
+            <div class="rounded-[8px] bg-[#f5f5f5] p-10 md:p-14 lg:p-16">
+                <div class="flex flex-col gap-8 lg:flex-row lg:items-stretch lg:gap-10">
+                    <div class="flex flex-col justify-center lg:w-[60%]">
+                        <h2 class="reveal-up text-[28px] font-bold leading-tight text-black md:text-[36px]" style="--reveal-delay: 0ms;">
+                            About <span class="text-[#ea5183]">DTTDC</span>
+                        </h2>
+                    <p class="reveal-up mt-6 text-[18px] leading-relaxed text-black" style="--reveal-delay: 80ms;">
+                        The Delhi Tourism &amp; Transportation Development Corporation (DTTDC) is a government agency that promotes tourism and film production in Delhi. As the nodal agency for Delhi Film Policy 2022, it streamlines film shoot approvals to attract productions.
+                    </p>
+                    <div class="mt-8 flex flex-col gap-6 lg:flex-row lg:gap-8">
+                        <div class="reveal-up flex-1" style="--reveal-delay: 160ms;">
+                            <p class="text-[18px] leading-relaxed text-black">
+                                DTTDC is organising the International Film Festival of Delhi (IFFD) in association with the Government of Delhi, with a view to elevate Delhi's global film presence and to contribute to the growth and diversification of the film and media ecosystem in the national capital.
+                            </p>
+                            <img src="assets/Delhi-Tourism.png" alt="Delhi Tourism" class="mt-6 h-auto w-full max-w-[200px] object-contain" />
+                        </div>
+                        <div class="reveal-up flex-1" style="--reveal-delay: 240ms;">
+                            <img src="assets/metro.png" alt="Delhi Metro and film" class="h-auto w-full rounded-[8px] object-cover" />
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-[40%]">
+                    <img src="assets/agriculture.png" alt="Delhi tourism and landmarks" class="reveal-left h-auto w-full rounded-[8px] object-cover" style="--reveal-delay: 0ms;" />
+                    <p class="reveal-up mt-6 text-[18px] leading-relaxed text-black" style="--reveal-delay: 120ms;">
+                        Beyond films, DTTDC handles a wide range of city infrastructure and services. It manages attractions like Dilli Haat and the Garden of Five Senses, runs tourist centres and the HoHo bus, and organizes cultural events.
+                    </p>
+                    <div class="reveal-up" style="--reveal-delay: 200ms;">
+                        <h4 class="mt-6 text-[18px] font-bold uppercase text-black md:text-[20px]">Visit DTTDC</h4>
+                        <a href="https://delhitourism.gov.in/" target="_blank" rel="noopener noreferrer" class="mt-2 inline-block break-words text-[16px] font-medium text-[#ea5183] underline decoration-[#ea5183] underline-offset-2 hover:opacity-90">https://delhitourism.gov.in/</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
 
-                    if (rightDecor) {
-                        rightDecor.style.transform = `translate3d(0, ${rightOffset}px, 0)`;
-                    }
-                }
+    <section class="bg-white py-16 md:py-20">
+        <div class="mx-auto w-[90%] max-w-[1280px]">
+            <div class="flex flex-col gap-10 lg:flex-row lg:gap-12">
+                <div class="lg:w-[30%]">
+                    <h2 class="reveal-up text-[28px] font-bold leading-tight text-black md:text-[36px]" style="--reveal-delay: 0ms;">
+                        Event <span class="text-[#ea5183]">Partner</span>
+                    </h2>
+                    <div class="reveal-up mt-6" style="--reveal-delay: 80ms;">
+                        <img src="assets/wiz.png" alt="Wizcraft Entertainment Agency" class="h-auto max-h-[80px] w-full max-w-[220px] object-contain object-left" />
+                    </div>
+                </div>
+                <div class="lg:w-[70%]">
+                    <h2 class="reveal-up text-left text-[28px] font-bold leading-tight text-black md:text-[36px] lg:text-center" style="--reveal-delay: 120ms;">
+                        Festival <span class="text-[#ea5183]">Sponsors</span>
+                    </h2>
+                    <div class="mt-6 flex flex-wrap items-center justify-center gap-6 md:gap-8">
+                        <img src="assets/PVR.png" alt="PVR Cinemas" class="reveal-up h-auto max-h-[80px] w-auto max-w-[160px] object-contain" style="--reveal-delay: 200ms;" />
+                        <img src="assets/pulz.png" alt="Pulz" class="reveal-up h-auto max-h-[80px] w-auto max-w-[160px] object-contain" style="--reveal-delay: 280ms;" />
+                        <img src="assets/qube.png" alt="Qube Cinema Network" class="reveal-up h-auto max-h-[80px] w-auto max-w-[160px] object-contain" style="--reveal-delay: 360ms;" />
+                        <img src="assets/cine.png" alt="Cinedubs" class="reveal-up h-auto max-h-[80px] w-auto max-w-[160px] object-contain" style="--reveal-delay: 440ms;" />
+                        <img src="assets/ufo.png" alt="UFO Cine Media Network" class="reveal-up h-auto max-h-[80px] w-auto max-w-[160px] object-contain" style="--reveal-delay: 520ms;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                ticking = false;
-            };
+    <footer class="bg-black text-white">
+        <div class="mx-auto w-[90%] max-w-[1280px] py-10">
+            <div class="flex flex-col items-center gap-8 text-center">
+                <div>
+                    <img src="assets/logo.jpg" alt="IFFD Logo" class="mx-auto h-auto w-[150px] object-contain" />
+                </div>
+                <p class="max-w-[720px] text-[15px] leading-relaxed text-white/90 md:text-[16px]">
+                    IFFD is a flagship initiative envisioned under the Delhi Film Policy. It is organised by the Delhi Tourism and Transport Development Corporation Ltd. (DTTDC) in association with the Government of Delhi.
+                </p>
+                <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[14px] font-medium md:gap-x-8">
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">About Us</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">Festival Schedule &amp; guide</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">Film Selection</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">CineXchange</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">CineVerse Expo</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">Masterclasses</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">Workshops/Live Demos</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">Registrations</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">FAQ</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">MEDIA</a>
+                </nav>
+                <div class="flex items-center justify-center gap-6">
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="YouTube">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon stroke-linecap="round" stroke-linejoin="round" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg>
+                    </a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="Facebook">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="Instagram">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="X">
+                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                </div>
+                <p class="mt-4 border-t border-white/20 pt-8 text-[14px] text-white/70">
+                    Copyright © IFFD - 2026. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
 
-            const requestParallax = () => {
-                if (ticking) {
-                    return;
-                }
-                ticking = true;
-                window.requestAnimationFrame(updateParallax);
-            };
-
-            window.addEventListener("scroll", requestParallax, { passive: true });
-            window.addEventListener("resize", requestParallax);
-            requestParallax();
-        }
-
-        function initHeaderInteractions() {
-            const menuToggle = document.getElementById("menu-toggle");
-            const menuClose = document.getElementById("menu-close");
-            const overlay = document.getElementById("mobile-menu-overlay");
-            const drawer = document.getElementById("mobile-menu-drawer");
-            const moreToggle = document.getElementById("more-toggle");
-            const moreMenu = document.getElementById("more-menu");
-            const moreArrow = document.getElementById("more-arrow");
-            const desktopMoreToggle = document.getElementById("desktop-more-toggle");
-            const desktopMoreMenu = document.getElementById("desktop-more-menu");
-            const desktopMoreArrow = document.getElementById("desktop-more-arrow");
-
-            if (!menuToggle || !overlay || !drawer) {
-                return;
-            }
-
-            const openMenu = () => {
-                drawer.classList.remove("translate-x-full");
-                overlay.classList.remove("hidden");
-                document.body.classList.add("overflow-hidden");
-            };
-
-            const closeMenu = () => {
-                drawer.classList.add("translate-x-full");
-                overlay.classList.add("hidden");
-                document.body.classList.remove("overflow-hidden");
-            };
-
-            menuToggle.addEventListener("click", openMenu);
-            if (menuClose) {
-                menuClose.addEventListener("click", closeMenu);
-            }
-            overlay.addEventListener("click", closeMenu);
-
-            document.addEventListener("keydown", (event) => {
-                if (event.key === "Escape") {
-                    closeMenu();
-                }
-            });
-
-            const desktopMediaQuery = window.matchMedia("(min-width: 1024px)");
-            desktopMediaQuery.addEventListener("change", (event) => {
-                if (event.matches) {
-                    closeMenu();
-                }
-            });
-
-            if (moreToggle && moreMenu && moreArrow) {
-                moreToggle.addEventListener("click", () => {
-                    moreMenu.classList.toggle("hidden");
-                    moreArrow.classList.toggle("rotate-180");
-                });
-            }
-
-            if (desktopMoreToggle && desktopMoreMenu && desktopMoreArrow) {
-                const toggleDesktopMore = () => {
-                    desktopMoreMenu.classList.toggle("hidden");
-                    desktopMoreArrow.classList.toggle("rotate-180");
-                };
-
-                desktopMoreToggle.addEventListener("click", (event) => {
-                    event.stopPropagation();
-                    toggleDesktopMore();
-                });
-
-                document.addEventListener("click", (event) => {
-                    if (!desktopMoreMenu.contains(event.target) && !desktopMoreToggle.contains(event.target)) {
-                        desktopMoreMenu.classList.add("hidden");
-                        desktopMoreArrow.classList.remove("rotate-180");
-                    }
-                });
-            }
-        }
-
-        initHeaderInteractions();
-        initHeroDots();
-        initHeroParallax();
-    </script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>
