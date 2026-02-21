@@ -205,12 +205,14 @@
 
         .nav-hover-indicator {
             position: absolute;
+            top: 0;
+            height: 100%;
             border-radius: 0;
             background-color: #ea5183;
             opacity: 0;
             pointer-events: none;
-            transition: left 0.28s ease, top 0.28s ease, width 0.28s ease, height 0.28s ease, opacity 0.2s ease;
-            will-change: left, top, width, height, opacity;
+            transition: left 0.28s ease, width 0.28s ease, opacity 0.2s ease;
+            will-change: left, width, opacity;
             z-index: 0;
         }
 
@@ -220,6 +222,7 @@
             display: inline-flex;
             align-items: center;
             min-height: 100%;
+            color: black;
         }
 
         .nav-hover-link.is-active {
@@ -258,7 +261,7 @@
 </head>
 <body>
     <!-- Header -->
-    <header id="main-header" class="fixed left-0 right-0 top-0 z-50 w-full overflow-visible bg-white lg:overflow-hidden">
+    <header id="main-header" class="fixed left-0 right-0 top-0 z-50 w-full overflow-visible bg-white">
         <div class="header-inner relative mx-auto flex w-[90%] items-center justify-between">
             <a href="#" class="flex h-full shrink-0 items-center self-stretch">
                 <img src="assets/logo.jpg" alt="IFFD Logo" class="header-logo h-full max-h-[100px] w-auto object-contain transition-[max-height] duration-300" />
@@ -269,7 +272,7 @@
                 class="nav-hover-nav relative ml-6 hidden h-full items-center justify-center gap-x-2 px-6 text-[14px] font-medium text-black min-[1481px]:flex"
             >
                 <span class="nav-hover-indicator"></span>
-                <a href="#" data-default-active="true" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">About Us</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">About Us</a>
                 <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Festival Schedule &amp; guide</a>
                 <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Film Selection</a>
                 <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineXchange</a>
@@ -277,7 +280,7 @@
                 <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Masterclasses</a>
                 <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Workshops/Live Demos</a>
                 <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Registrations</a>
-                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">FAQ</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">FAQs</a>
                 <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">MEDIA</a>
             </nav>
 
@@ -286,7 +289,7 @@
                 class="nav-hover-nav ml-6 hidden h-full items-center justify-center gap-x-2 px-6 text-[14px] font-medium text-black min-[1024px]:flex min-[1481px]:hidden"
             >
                 <span class="nav-hover-indicator"></span>
-                <a href="#" data-default-active="true" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">About Us</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">About Us</a>
                 <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Festival Schedule &amp; guide</a>
                 <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Film Selection</a>
                 <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineXchange</a>
@@ -302,7 +305,7 @@
                         <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">Masterclasses</a>
                         <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">Workshops/Live Demos</a>
                         <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">Registrations</a>
-                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">FAQ</a>
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">FAQs</a>
                         <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">MEDIA</a>
                     </div>
                 </div>
@@ -362,22 +365,25 @@
             <a href="#" class="block text-black transition hover:text-gray-700">Masterclasses</a>
             <a href="#" class="block text-black transition hover:text-gray-700">Workshops/Live Demos</a>
             <a href="#" class="block text-black transition hover:text-gray-700">Registrations</a>
-            <a href="#" class="block text-black transition hover:text-gray-700">FAQ</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">FAQs</a>
             <a href="#" class="block text-black transition hover:text-gray-700">MEDIA</a>
         </nav>
         <div class="mt-auto border-t border-black/10 pt-6">
             <div class="flex items-center gap-6">
-                <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="YouTube">
+                <a href="https://www.youtube.com/@IFFDelhi" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="YouTube">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon stroke-linecap="round" stroke-linejoin="round" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg>
                 </a>
-                <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="Facebook">
+                <a href="https://www.facebook.com/profile.php?id=61587405451302" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="Facebook">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                 </a>
-                <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="Instagram">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                <a href="https://www.linkedin.com/in/iff-delhi-b520973aa/" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="LinkedIn">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                 </a>
-                <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="X">
+                <a href="https://x.com/IFFDelhi" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="X">
                     <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/iffdelhi/" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="Instagram">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                 </a>
             </div>
         </div>
@@ -390,9 +396,9 @@
         class="relative flex min-h-[1200px] flex-col overflow-hidden bg-cover bg-center h-auto md:h-[900px] lg:h-[960px] min-[1240px]:h-auto"
         style="background-image: url('assets/main-sec.jpg');"
     >
-        <div id="hero-left-scale" class="absolute left-0 top-6 origin-left scale-[0.52] sm:scale-[0.68] md:top-1/2 md:scale-[0.82] lg:scale-100">
+        <div id="hero-left-scale" class="absolute left-0 top-1/2 origin-left -translate-y-1/2 scale-[0.52] sm:scale-[0.68] md:scale-[0.82] lg:scale-100">
             <div id="hero-left-decor" class="hero-slide-pop-left">
-                <div class="flex flex-col items-start md:-translate-y-1/2">
+                <div class="flex flex-col items-start">
                     <div id="hero-dots">
                         <div class="grid grid-cols-3 gap-2">
                             <span class="hero-dot h-[15px] w-[15px] rounded-full"></span>
@@ -427,12 +433,12 @@
                     <img
                         src="assets/leftbottom.png"
                         alt="Decorative left shape"
-                        class="mt-6 w-[110px] sm:w-[130px] md:w-[145px] lg:w-[160px] min-[1280px]:w-[140px]"
+                        class="mt-16 sm:mt-20 md:mt-8 w-[90px] sm:w-[110px] md:w-[145px] lg:w-[190px] min-[1280px]:w-[220px]"
                     />
                 </div>
             </div>
         </div>
-        <div id="hero-right-scale" class="pointer-events-none absolute inset-0 origin-top-right scale-[0.58] sm:scale-[0.66] md:scale-[0.76] lg:scale-[0.88] xl:scale-100">
+        <div id="hero-right-scale" class="pointer-events-none absolute inset-0 origin-top-right scale-[0.42] sm:scale-[0.52] md:scale-[0.76] lg:scale-[0.88] xl:scale-100">
             <div id="hero-right-decor" class="hero-slide-pop-right relative h-full w-full">
                 <img
                     src="assets/circle-film.png"
@@ -805,21 +811,24 @@
                     <a href="#" class="text-[#ea5183] transition hover:opacity-90">Masterclasses</a>
                     <a href="#" class="text-[#ea5183] transition hover:opacity-90">Workshops/Live Demos</a>
                     <a href="#" class="text-[#ea5183] transition hover:opacity-90">Registrations</a>
-                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">FAQ</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">FAQs</a>
                     <a href="#" class="text-[#ea5183] transition hover:opacity-90">MEDIA</a>
                 </nav>
                 <div class="flex items-center justify-center gap-6">
-                    <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="YouTube">
+                    <a href="https://www.youtube.com/@IFFDelhi" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="YouTube">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon stroke-linecap="round" stroke-linejoin="round" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg>
                     </a>
-                    <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="Facebook">
+                    <a href="https://www.facebook.com/profile.php?id=61587405451302" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="Facebook">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                     </a>
-                    <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="Instagram">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    <a href="https://www.linkedin.com/in/iff-delhi-b520973aa/" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="LinkedIn">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                     </a>
-                    <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="X">
+                    <a href="https://x.com/IFFDelhi" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="X">
                         <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/iffdelhi/" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="Instagram">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                     </a>
                 </div>
                 <p class="mt-4 border-t border-white/20 pt-8 text-[14px] text-white/70">

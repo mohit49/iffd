@@ -133,7 +133,7 @@
                 return;
             }
 
-            const defaultActive = links.find((link) => link.hasAttribute("data-default-active")) || links[0];
+            const defaultActive = links.find((link) => link.hasAttribute("data-default-active")) || null;
 
             const setActiveLink = (activeLink) => {
                 links.forEach((link) => {
@@ -149,12 +149,9 @@
                 const navRect = nav.getBoundingClientRect();
                 const linkRect = link.getBoundingClientRect();
                 const offsetLeft = linkRect.left - navRect.left;
-                const offsetTop = linkRect.top - navRect.top;
 
                 indicator.style.width = `${linkRect.width}px`;
-                indicator.style.height = `${linkRect.height}px`;
                 indicator.style.left = `${offsetLeft}px`;
-                indicator.style.top = `${offsetTop}px`;
                 indicator.style.opacity = "1";
                 setActiveLink(link);
             };
@@ -162,6 +159,7 @@
             const resetToDefault = () => {
                 if (!defaultActive) {
                     indicator.style.opacity = "0";
+                    links.forEach((link) => link.classList.remove("is-active"));
                     return;
                 }
                 moveIndicator(defaultActive);
