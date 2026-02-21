@@ -11,253 +11,7 @@
         rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        html,
-        body {
-            width: 100%;
-            overflow-x: hidden;
-        }
-
-        body {
-            font-family: "Open Sans", sans-serif;
-        }
-
-        .scrollbar-hide {
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-
-        .scroll-fade-left,
-        .scroll-fade-right {
-            pointer-events: none;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 48px;
-            z-index: 1;
-        }
-        .scroll-fade-left {
-            left: 0;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0.95), transparent);
-        }
-        .scroll-fade-right {
-            right: 0;
-            background: linear-gradient(to left, rgba(255, 255, 255, 0.95), transparent);
-        }
-
-        @keyframes heroFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(14px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes heroSlidePopLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-80px) scale(0.75);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0) scale(1);
-            }
-        }
-        @keyframes heroSlidePopRight {
-            from {
-                opacity: 0;
-                transform: translateX(80px) scale(0.75);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0) scale(1);
-            }
-        }
-        .hero-slide-pop-left {
-            opacity: 0;
-            transform-origin: left center;
-            animation: heroSlidePopLeft 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-        .hero-slide-pop-right {
-            opacity: 0;
-            transform-origin: right center;
-            animation: heroSlidePopRight 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) 0.12s forwards;
-        }
-
-        .hero-poster {
-            animation: heroFadeIn 1s ease-out both;
-            transition: transform 0.35s ease;
-            cursor: pointer;
-        }
-
-        .hero-poster:hover {
-            transform: scale(1.08);
-        }
-
-        .hero-dot {
-            background-color: #313c40;
-            transition: background-color 0.45s ease-in-out;
-        }
-
-        @keyframes filmRoll {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .film-roll {
-            animation: filmRoll 18s linear infinite;
-            transform-origin: center;
-        }
-
-        .film-roll-reverse {
-            animation: filmRoll 18s linear infinite reverse;
-            transform-origin: center;
-        }
-
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-48px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-            transition-delay: var(--reveal-delay, 0ms);
-        }
-
-        .reveal-left.is-visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .reveal-up {
-            opacity: 0;
-            transform: translateY(36px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-            transition-delay: var(--reveal-delay, 0ms);
-        }
-
-        .reveal-up.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .reveal-slide-pop-left {
-            opacity: 0;
-            transform: translateX(-56px) scale(0.88);
-            transition: opacity 0.65s ease-out, transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
-            transition-delay: var(--reveal-delay, 0ms);
-        }
-        .reveal-slide-pop-left.is-visible {
-            opacity: 1;
-            transform: translateX(0) scale(1);
-        }
-        .reveal-slide-pop-right {
-            opacity: 0;
-            transform: translateX(56px) scale(0.88);
-            transition: opacity 0.65s ease-out, transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
-            transition-delay: var(--reveal-delay, 0ms);
-        }
-        .reveal-slide-pop-right.is-visible {
-            opacity: 1;
-            transform: translateX(0) scale(1);
-        }
-
-        @keyframes starPulse {
-            0% {
-                opacity: 0.35;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0.35;
-            }
-        }
-
-        .star-strip {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            overflow: hidden;
-            min-height: 40px;
-        }
-
-        .star-item {
-            width: 22px;
-            height: 22px;
-            flex: 0 0 auto;
-            opacity: 0.5;
-            animation-name: starPulse;
-            animation-timing-function: ease-in-out;
-            animation-iteration-count: infinite;
-        }
-
-        .nav-hover-nav {
-            position: relative;
-        }
-
-        .nav-hover-indicator {
-            position: absolute;
-            top: 0;
-            height: 100%;
-            border-radius: 0;
-            background-color: #ea5183;
-            opacity: 0;
-            pointer-events: none;
-            transition: left 0.28s ease, width 0.28s ease, opacity 0.2s ease;
-            will-change: left, width, opacity;
-            z-index: 0;
-        }
-
-        .nav-hover-link {
-            position: relative;
-            z-index: 1;
-            display: inline-flex;
-            align-items: center;
-            min-height: 100%;
-            color: black;
-        }
-
-        .nav-hover-link.is-active {
-            color: #ffffff;
-        }
-
-        .header-inner {
-            height: 100px;
-            transition: height 0.3s ease-out, min-height 0.3s ease-out;
-        }
-        header.header-compact .header-inner {
-            height: 70px;
-            min-height: 70px;
-        }
-        header.header-compact .header-logo {
-            max-height: 70px;
-        }
-        header.header-compact {
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-        }
-        #main-content {
-            padding-top: 100px;
-            transition: padding-top 0.3s ease-out;
-        }
-        body.header-compact-active #main-content {
-            padding-top: 70px;
-        }
-        #main-header {
-            transform: translateY(0);
-            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
-        }
-        #main-header.header-hidden {
-            transform: translateY(-100%);
-        }
-    </style>
+    <link rel="stylesheet" href="style/main.css" />
 </head>
 <body>
     <!-- Header -->
@@ -335,6 +89,21 @@
             />
         </div>
     </header>
+
+    <!-- Film View Popup -->
+    <div id="film-popup-overlay" class="fixed inset-0 z-[2000] flex items-center justify-center bg-black/70 p-4" aria-hidden="true" aria-modal="true" role="dialog" aria-label="View Film">
+        <div id="film-popup-modal" class="relative w-[90%] max-w-none rounded-lg bg-white shadow-xl sm:w-[80%] md:w-[70%]">
+            <button id="film-popup-close" class="absolute -right-3 -top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-600 shadow-lg transition hover:bg-gray-100 hover:text-black" aria-label="Close popup" type="button">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <div class="overflow-hidden rounded-lg">
+                <video id="film-popup-video" class="h-auto w-full" controls playsinline preload="metadata">
+                    <source src="assets/video.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
 
     <div id="mobile-menu-overlay" class="fixed inset-0 z-[999] hidden bg-black/60 lg:hidden" aria-hidden="true"></div>
     <aside
@@ -478,7 +247,7 @@
             </div>
         </div>
         <div class="mx-auto flex w-full justify-center pt-24 md:pt-30">
-            <img src="assets/View-Film.png" alt="View Film" class="hero-poster h-auto w-[250px] max-w-[86%] sm:w-[290px] md:w-[340px] lg:w-[370px]" />
+            <img id="view-film" src="assets/View-Film.png" alt="View Film" class="hero-poster h-auto w-[250px] max-w-[86%] sm:w-[290px] md:w-[340px] lg:w-[370px] cursor-pointer" role="button" tabindex="0" />
         </div>
         <div class="relative z-40 mt-auto w-full">
             <div class="mx-auto flex w-[88%] max-w-[1280px] flex-col items-center justify-center gap-6 px-4 pt-6 pb-10 text-white sm:w-[86%] sm:px-5 md:w-[84%] md:px-8 md:pt-6 md:pb-16 lg:w-[70%] min-[1240px]:flex-row min-[1240px]:items-center min-[1240px]:gap-16 min-[1290px]:w-[70%]">
@@ -650,13 +419,13 @@
 
     <section class="bg-white py-16 md:py-20">
         <div class="mx-auto w-[90%] max-w-[1280px]">
-            <div class="relative w-full rounded-[8px] border-[5px] border-[#e62877] p-8 pb-20 md:p-10 md:pb-24">
-                <div class="reveal-up flex flex-wrap items-center justify-center gap-4" style="--reveal-delay: 0ms;">
-                    <img src="assets/aro.png" alt="" class="h-8 w-auto shrink-0 scale-x-[-1] md:h-10" aria-hidden="true" />
-                    <h2 class="text-center text-[28px] font-bold leading-tight text-black md:text-[36px]">
+            <div class="relative w-full rounded-[8px] border-[5px] border-[#e62877] p-8 pb-40 md:p-10 md:pb-24">
+                <div class="reveal-up flex flex-nowrap items-center justify-center gap-2 md:flex-wrap md:gap-4" style="--reveal-delay: 0ms;">
+                    <img src="assets/aro.png" alt="" class="h-6 w-auto shrink-0 scale-x-[-1] md:h-10" aria-hidden="true" />
+                    <h2 class="text-center text-[20px] font-bold leading-tight text-black md:text-[36px]">
                         Why You Should Attend <span class="text-[#e62877]">IFFD.</span>
                     </h2>
-                    <img src="assets/aro.png" alt="" class="h-8 w-auto shrink-0 md:h-10" aria-hidden="true" />
+                    <img src="assets/aro.png" alt="" class="h-6 w-auto shrink-0 md:h-10" aria-hidden="true" />
                 </div>
                 <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     <div class="reveal-up rounded-[8px] border border-dashed border-black px-6 py-8" style="--reveal-delay: 80ms;">

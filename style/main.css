@@ -1,0 +1,262 @@
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+.scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-fade-left,
+.scroll-fade-right {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 48px;
+    z-index: 1;
+}
+.scroll-fade-left {
+    left: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.95), transparent);
+}
+.scroll-fade-right {
+    right: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.95), transparent);
+}
+
+@keyframes heroFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroSlidePopLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-80px) scale(0.75);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+@keyframes heroSlidePopRight {
+    from {
+        opacity: 0;
+        transform: translateX(80px) scale(0.75);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+.hero-slide-pop-left {
+    opacity: 0;
+    transform-origin: left center;
+    animation: heroSlidePopLeft 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.hero-slide-pop-right {
+    opacity: 0;
+    transform-origin: right center;
+    animation: heroSlidePopRight 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) 0.12s forwards;
+}
+
+.hero-poster {
+    animation: heroFadeIn 1s ease-out both;
+    transition: transform 0.35s ease;
+    cursor: pointer;
+}
+
+.hero-poster:hover {
+    transform: scale(1.08);
+}
+
+.hero-dot {
+    background-color: #313c40;
+    transition: background-color 0.45s ease-in-out;
+}
+
+@keyframes filmRoll {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.film-roll {
+    animation: filmRoll 18s linear infinite;
+    transform-origin: center;
+}
+
+.film-roll-reverse {
+    animation: filmRoll 18s linear infinite reverse;
+    transform-origin: center;
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-48px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-left.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-up {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-slide-pop-left {
+    opacity: 0;
+    transform: translateX(-56px) scale(0.88);
+    transition: opacity 0.65s ease-out, transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-slide-pop-left.is-visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+.reveal-slide-pop-right {
+    opacity: 0;
+    transform: translateX(56px) scale(0.88);
+    transition: opacity 0.65s ease-out, transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-slide-pop-right.is-visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+@keyframes starPulse {
+    0% {
+        opacity: 0.35;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.35;
+    }
+}
+
+.star-strip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+    min-height: 40px;
+}
+
+.star-item {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 auto;
+    opacity: 0.5;
+    animation-name: starPulse;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.nav-hover-nav {
+    position: relative;
+}
+
+.nav-hover-indicator {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    border-radius: 0;
+    background-color: #ea5183;
+    opacity: 0;
+    pointer-events: none;
+    transition: left 0.28s ease, width 0.28s ease, opacity 0.2s ease;
+    will-change: left, width, opacity;
+    z-index: 0;
+}
+
+.nav-hover-link {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    min-height: 100%;
+    color: black;
+}
+
+.nav-hover-link.is-active {
+    color: #ffffff;
+}
+
+.header-inner {
+    height: 100px;
+    transition: height 0.3s ease-out, min-height 0.3s ease-out;
+}
+header.header-compact .header-inner {
+    height: 70px;
+    min-height: 70px;
+}
+header.header-compact .header-logo {
+    max-height: 70px;
+}
+header.header-compact {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+#main-content {
+    padding-top: 100px;
+    transition: padding-top 0.3s ease-out;
+}
+body.header-compact-active #main-content {
+    padding-top: 70px;
+}
+#main-header {
+    transform: translateY(0);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+#main-header.header-hidden {
+    transform: translateY(-100%);
+}
+
+#film-popup-overlay {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+#film-popup-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+#film-popup-modal {
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+#film-popup-overlay.is-open #film-popup-modal {
+    transform: scale(1);
+}

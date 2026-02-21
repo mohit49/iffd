@@ -353,6 +353,60 @@
         window.addEventListener("resize", onResize);
     }
 
+    function initViewFilmPopup() {
+        const viewFilm = document.getElementById("view-film");
+        const overlay = document.getElementById("film-popup-overlay");
+        const closeBtn = document.getElementById("film-popup-close");
+        const video = document.getElementById("film-popup-video");
+
+        if (!viewFilm || !overlay || !closeBtn) {
+            return;
+        }
+
+        const isDesktop = () => window.matchMedia("(min-width: 768px)").matches;
+
+        const openPopup = () => {
+            overlay.classList.add("is-open");
+            overlay.setAttribute("aria-hidden", "false");
+            document.body.classList.add("overflow-hidden");
+            if (video) {
+                video.currentTime = 0;
+                if (isDesktop()) {
+                    video.play().catch(() => {});
+                }
+            }
+        };
+
+        const closePopup = () => {
+            overlay.classList.remove("is-open");
+            overlay.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("overflow-hidden");
+            if (video) {
+                video.pause();
+            }
+        };
+
+        viewFilm.addEventListener("click", openPopup);
+        viewFilm.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                openPopup();
+            }
+        });
+        closeBtn.addEventListener("click", closePopup);
+        overlay.addEventListener("click", (e) => {
+            if (e.target === overlay) {
+                closePopup();
+            }
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && overlay.classList.contains("is-open")) {
+                closePopup();
+            }
+        });
+    }
+
     initHeaderInteractions();
     initStickyHeader();
     initNavHoverIndicator();
@@ -360,4 +414,5 @@
     initHeroParallax();
     initScrollReveal();
     initStarBorder();
+    initViewFilmPopup();
 })();
