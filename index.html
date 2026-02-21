@@ -258,7 +258,7 @@
 </head>
 <body>
     <!-- Header -->
-    <header id="main-header" class="fixed left-0 right-0 top-0 z-50 w-full bg-white lg:overflow-hidden">
+    <header id="main-header" class="fixed left-0 right-0 top-0 z-50 w-full overflow-visible bg-white lg:overflow-hidden">
         <div class="header-inner relative mx-auto flex w-[90%] items-center justify-between">
             <a href="#" class="flex h-full shrink-0 items-center self-stretch">
                 <img src="assets/logo.jpg" alt="IFFD Logo" class="header-logo h-full max-h-[100px] w-auto object-contain transition-[max-height] duration-300" />
@@ -331,41 +331,57 @@
                 class="pointer-events-none absolute left-1/2 top-1/2 w-[92px] -translate-x-1/2 -translate-y-1/2 lg:hidden"
             />
         </div>
-
-        <div id="mobile-menu-overlay" class="fixed inset-0 z-[999] hidden bg-black/60 lg:hidden"></div>
-        <aside
-            id="mobile-menu-drawer"
-            class="fixed right-0 top-0 z-[1000] h-full w-[320px] max-w-[85vw] translate-x-full overflow-y-auto bg-white p-6 text-black transition-transform duration-300 ease-in-out lg:hidden"
-            aria-label="Mobile menu"
-        >
-            <div class="flex items-center justify-between">
-                <span class="text-[14px] font-semibold uppercase tracking-wide text-black/70">Menu</span>
-                <button
-                    id="menu-close"
-                    class="inline-flex h-9 w-9 items-center justify-center rounded border border-black/20 transition hover:bg-black/5"
-                    aria-label="Close menu"
-                    type="button"
-                >
-                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                        <path d="M6 6l12 12M18 6l-12 12" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <nav id="mobile-menu-links" class="mt-8 flex flex-col gap-4 text-[14px] font-medium text-black">
-                <a href="#" class="block text-black transition hover:text-gray-700">About Us</a>
-                <a href="#" class="block text-black transition hover:text-gray-700">Festival Schedule &amp; guide</a>
-                <a href="#" class="block text-black transition hover:text-gray-700">Film Selection</a>
-                <a href="#" class="block text-black transition hover:text-gray-700">CineXchange</a>
-                <a href="#" class="block text-black transition hover:text-gray-700">CineVerse Expo</a>
-                <a href="#" class="block text-black transition hover:text-gray-700">Masterclasses</a>
-                <a href="#" class="block text-black transition hover:text-gray-700">Workshops/Live Demos</a>
-                <a href="#" class="block text-black transition hover:text-gray-700">Registrations</a>
-                <a href="#" class="block text-black transition hover:text-gray-700">FAQ</a>
-                <a href="#" class="block text-black transition hover:text-gray-700">MEDIA</a>
-            </nav>
-        </aside>
     </header>
+
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-[999] hidden bg-black/60 lg:hidden" aria-hidden="true"></div>
+    <aside
+        id="mobile-menu-drawer"
+        class="fixed right-0 top-0 z-[1000] flex h-full w-[320px] max-w-[85vw] translate-x-full flex-col overflow-y-auto bg-white p-6 text-black transition-transform duration-300 ease-in-out lg:hidden"
+        aria-label="Mobile menu"
+    >
+        <div class="flex items-center justify-between">
+            <span class="text-[14px] font-semibold uppercase tracking-wide text-black/70">Menu</span>
+            <button
+                id="menu-close"
+                class="inline-flex h-9 w-9 items-center justify-center rounded border border-black/20 transition hover:bg-black/5"
+                aria-label="Close menu"
+                type="button"
+            >
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M6 6l12 12M18 6l-12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </button>
+        </div>
+
+        <nav id="mobile-menu-links" class="mt-10 flex flex-col gap-5 text-[16px] font-medium text-black">
+            <a href="#" class="block text-black transition hover:text-gray-700">About Us</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">Festival Schedule &amp; guide</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">Film Selection</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">CineXchange</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">CineVerse Expo</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">Masterclasses</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">Workshops/Live Demos</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">Registrations</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">FAQ</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">MEDIA</a>
+        </nav>
+        <div class="mt-auto border-t border-black/10 pt-6">
+            <div class="flex items-center gap-6">
+                <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="YouTube">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon stroke-linecap="round" stroke-linejoin="round" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg>
+                </a>
+                <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="Facebook">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="Instagram">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="#" class="text-[#ea5183] transition hover:opacity-90" aria-label="X">
+                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+    </aside>
 
     <div id="main-content">
     <!-- Hero Section -->
