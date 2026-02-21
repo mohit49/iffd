@@ -225,19 +225,48 @@
         .nav-hover-link.is-active {
             color: #ffffff;
         }
+
+        .header-inner {
+            height: 100px;
+            transition: height 0.3s ease-out, min-height 0.3s ease-out;
+        }
+        header.header-compact .header-inner {
+            height: 70px;
+            min-height: 70px;
+        }
+        header.header-compact .header-logo {
+            max-height: 70px;
+        }
+        header.header-compact {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        #main-content {
+            padding-top: 100px;
+            transition: padding-top 0.3s ease-out;
+        }
+        body.header-compact-active #main-content {
+            padding-top: 70px;
+        }
+        #main-header {
+            transform: translateY(0);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+        }
+        #main-header.header-hidden {
+            transform: translateY(-100%);
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="bg-white">
-        <div class="relative mx-auto flex h-[100px] w-[90%] items-center justify-between">
-            <a href="#" class="shrink-0 self-stretch">
-                <img src="assets/logo.jpg" alt="IFFD Logo" class="h-full w-auto object-contain" />
+    <header id="main-header" class="fixed left-0 right-0 top-0 z-50 w-full bg-white lg:overflow-hidden">
+        <div class="header-inner relative mx-auto flex w-[90%] items-center justify-between">
+            <a href="#" class="flex h-full shrink-0 items-center self-stretch">
+                <img src="assets/logo.jpg" alt="IFFD Logo" class="header-logo h-full max-h-[100px] w-auto object-contain transition-[max-height] duration-300" />
             </a>
 
             <nav
                 id="desktop-full-nav"
-                class="nav-hover-nav relative ml-6 hidden h-full items-center justify-center gap-x-5 px-6 text-[14px] font-medium text-black min-[1481px]:flex"
+                class="nav-hover-nav relative ml-6 hidden h-full items-center justify-center gap-x-2 px-6 text-[14px] font-medium text-black min-[1481px]:flex"
             >
                 <span class="nav-hover-indicator"></span>
                 <a href="#" data-default-active="true" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">About Us</a>
@@ -254,7 +283,7 @@
 
             <nav
                 id="desktop-compact-nav"
-                class="nav-hover-nav ml-6 hidden h-full items-center justify-center gap-x-5 px-6 text-[14px] font-medium text-black min-[1024px]:flex min-[1481px]:hidden"
+                class="nav-hover-nav ml-6 hidden h-full items-center justify-center gap-x-2 px-6 text-[14px] font-medium text-black min-[1024px]:flex min-[1481px]:hidden"
             >
                 <span class="nav-hover-indicator"></span>
                 <a href="#" data-default-active="true" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">About Us</a>
@@ -338,7 +367,7 @@
         </aside>
     </header>
 
-
+    <div id="main-content">
     <!-- Hero Section -->
     <section
         id="hero-section"
@@ -739,6 +768,8 @@
             </div>
         </div>
     </section>
+
+    </div><!-- #main-content -->
 
     <footer class="bg-black text-white">
         <div class="mx-auto w-[90%] max-w-[1280px] py-10">
