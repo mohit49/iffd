@@ -285,6 +285,14 @@ body.header-compact-active #main-content {
 .committee-tile-overlay {
     opacity: 0;
     transition: opacity 0.3s ease;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-top: 2.5rem;
+    padding-bottom: 2rem;
+}
+.committee-tile-overlay::-webkit-scrollbar {
+    display: none;
 }
 .committee-tile:hover .committee-tile-overlay {
     opacity: 1;
@@ -362,6 +370,72 @@ body.header-compact-active #main-content {
 }
 .registration-tabs input[type="radio"]:checked {
     background-image: radial-gradient(circle at center, white 6px, transparent 6px);
+}
+
+/* Header dropdowns */
+.header-dropdown {
+    position: relative;
+}
+.header-dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font: inherit;
+    color: inherit;
+}
+.header-dropdown-menu {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 100;
+    min-width: 200px;
+    margin-top: 0.25rem;
+    padding: 0.5rem 0;
+    border-radius: 0.375rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: white;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    color: #111;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+}
+.header-dropdown.is-open .header-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.header-dropdown-menu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #374151;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.header-dropdown-menu a:hover {
+    background: #f3f4f6;
+    color: #111;
+}
+.header-dropdown-arrow {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.2s ease;
+}
+.header-dropdown.is-open .header-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Mobile menu: main headings big, sub menu links small */
+#mobile-menu-links > div > p {
+    font-size: 1.125rem;  /* 18px - main menu heading */
+}
+#mobile-menu-links > div > div a {
+    font-size: 0.875rem;  /* 14px - sub menu */
 }
 
 /* Transparent text with thin white outline - bold, large */

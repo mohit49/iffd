@@ -101,6 +101,35 @@
         });
     }
 
+    function initHeaderDropdowns() {
+        document.querySelectorAll(".header-dropdown").forEach((dropdown) => {
+            const toggle = dropdown.querySelector(".header-dropdown-toggle");
+            const menu = dropdown.querySelector(".header-dropdown-menu");
+            if (!toggle || !menu) return;
+
+            toggle.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const isOpen = dropdown.classList.toggle("is-open");
+                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                document.querySelectorAll(".header-dropdown").forEach((other) => {
+                    if (other !== dropdown) {
+                        other.classList.remove("is-open");
+                        const t = other.querySelector(".header-dropdown-toggle");
+                        if (t) t.setAttribute("aria-expanded", "false");
+                    }
+                });
+            });
+        });
+
+        document.addEventListener("click", () => {
+            document.querySelectorAll(".header-dropdown.is-open").forEach((dropdown) => {
+                dropdown.classList.remove("is-open");
+                const t = dropdown.querySelector(".header-dropdown-toggle");
+                if (t) t.setAttribute("aria-expanded", "false");
+            });
+        });
+    }
+
     function initStickyHeader() {
         const header = document.getElementById("main-header");
         if (!header) return;
@@ -722,20 +751,31 @@
         const contents = document.querySelectorAll(".registration-tab-content");
         if (!tabs.length || !contents.length) return;
 
+        function switchToTab(tabValue) {
+            const targetId = "tab-" + tabValue;
+            const tab = Array.from(tabs).find((t) => t.dataset.tab === tabValue);
+            const content = document.getElementById(targetId);
+            if (!tab || !content) return;
+            tabs.forEach((t) => {
+                t.classList.remove("active", "border-[#ea5183]", "text-[#ea5183]");
+                t.classList.add("border-transparent", "text-gray-500");
+            });
+            tab.classList.add("active", "border-[#ea5183]", "text-[#ea5183]");
+            tab.classList.remove("border-transparent", "text-gray-500");
+            contents.forEach((c) => {
+                c.classList.add("hidden");
+                if (c.id === targetId) c.classList.remove("hidden");
+            });
+        }
+
+        const hash = (window.location.hash || "").replace("#", "");
+        if (hash === "media" || hash === "general") {
+            switchToTab(hash);
+        }
+
         tabs.forEach((tab) => {
             tab.addEventListener("click", () => {
-                const targetId = "tab-" + (tab.dataset.tab || "");
-                tabs.forEach((t) => {
-                    t.classList.remove("active", "border-[#ea5183]", "text-[#ea5183]");
-                    t.classList.add("border-transparent", "text-gray-500");
-                });
-                tab.classList.add("active", "border-[#ea5183]", "text-[#ea5183]");
-                tab.classList.remove("border-transparent", "text-gray-500");
-
-                contents.forEach((c) => {
-                    c.classList.add("hidden");
-                    if (c.id === targetId) c.classList.remove("hidden");
-                });
+                switchToTab(tab.dataset.tab || "");
             });
         });
     }
@@ -1081,6 +1121,7 @@
     }
 
     initHeaderInteractions();
+    initHeaderDropdowns();
     initStickyHeader();
     initNavHoverIndicator();
     initHeroDots();
