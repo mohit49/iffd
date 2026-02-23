@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrations - IFFD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style/main.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header" class="fixed left-0 right-0 top-0 z-50 w-full overflow-visible bg-white">
+        <div class="header-inner relative mx-auto flex w-[90%] items-center justify-between">
+            <a href="index.html" class="flex h-full shrink-0 items-center self-stretch">
+                <img src="assets/logo.jpg" alt="IFFD Logo" class="header-logo h-full max-h-[100px] w-auto object-contain transition-[max-height] duration-300" />
+            </a>
+
+            <nav
+                id="desktop-full-nav"
+                class="nav-hover-nav relative ml-6 hidden h-full items-center justify-center gap-x-2 px-6 text-[14px] font-medium text-black min-[1481px]:flex"
+            >
+                <span class="nav-hover-indicator"></span>
+                <a href="about.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">About Us</a>
+                <a href="coming-soon.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Festival Schedule &amp; Guide</a>
+                <a href="index.html#categories" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Film Selection</a>
+                <a href="index.html#cinexchange" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineXchange</a>
+                <a href="expo.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineVerse Expo</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Masterclasses</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Workshops/Live Demos</a>
+                <a href="registration.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white" data-default-active>Registrations</a>
+                <a href="faqs.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">FAQs</a>
+                <a href="media-gallery.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Media</a>
+            </nav>
+
+            <nav
+                id="desktop-compact-nav"
+                class="nav-hover-nav ml-6 hidden h-full items-center justify-center gap-x-2 px-6 text-[14px] font-medium text-black min-[1024px]:flex min-[1481px]:hidden"
+            >
+                <span class="nav-hover-indicator"></span>
+                <a href="about.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">About Us</a>
+                <a href="coming-soon.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Festival Schedule &amp; Guide</a>
+                <a href="index.html#categories" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Film Selection</a>
+                <a href="index.html#cinexchange" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineXchange</a>
+                <a href="expo.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineVerse Expo</a>
+                <div class="relative">
+                    <button id="desktop-more-toggle" class="nav-hover-link flex h-full items-center gap-2 px-2 transition hover:text-white" type="button">
+                        <span>More</span>
+                        <svg id="desktop-more-arrow" class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.51a.75.75 0 01-1.08 0l-4.25-4.51a.75.75 0 01.02-1.06z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    <div id="desktop-more-menu" class="absolute right-0 top-full z-30 mt-3 hidden min-w-[220px] rounded border border-black/10 bg-white p-3 text-[14px] text-black shadow-lg">
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">Masterclasses</a>
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">Workshops/Live Demos</a>
+                        <a href="registration.html" class="block px-2 py-1.5 transition hover:text-gray-700">Registrations</a>
+                        <a href="faqs.html" class="block px-2 py-1.5 transition hover:text-gray-700">FAQs</a>
+                        <a href="media-gallery.html" class="block px-2 py-1.5 transition hover:text-gray-700">Media</a>
+                    </div>
+                </div>
+            </nav>
+
+            <button
+                id="menu-toggle"
+                class="inline-flex h-10 w-10 items-center justify-center rounded border border-black/20 text-black transition hover:bg-black/5 lg:hidden"
+                aria-label="Open menu"
+                type="button"
+            >
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </button>
+
+            <img
+                src="assets/Delhi-Govt.png"
+                alt="Delhi Government"
+                class="hidden w-[150px] shrink-0 lg:block"
+            />
+
+            <img
+                src="assets/Delhi-Govt.png"
+                alt="Delhi Government"
+                class="pointer-events-none absolute left-1/2 top-1/2 w-[92px] -translate-x-1/2 -translate-y-1/2 lg:hidden"
+            />
+        </div>
+    </header>
+
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-[999] hidden bg-black/60 lg:hidden" aria-hidden="true"></div>
+    <aside
+        id="mobile-menu-drawer"
+        class="fixed right-0 top-0 z-[1000] flex h-full w-[320px] max-w-[85vw] translate-x-full flex-col overflow-y-auto bg-white p-6 text-black transition-transform duration-300 ease-in-out lg:hidden"
+        aria-label="Mobile menu"
+    >
+        <div class="flex items-center justify-between">
+            <span class="text-[14px] font-semibold uppercase tracking-wide text-black/70">Menu</span>
+            <button
+                id="menu-close"
+                class="inline-flex h-9 w-9 items-center justify-center rounded border border-black/20 transition hover:bg-black/5"
+                aria-label="Close menu"
+                type="button"
+            >
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M6 6l12 12M18 6l-12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </button>
+        </div>
+
+        <nav id="mobile-menu-links" class="mt-10 flex flex-col gap-5 text-[16px] font-medium text-black">
+            <a href="about.html" class="block text-black transition hover:text-gray-700">About Us</a>
+            <a href="coming-soon.html" class="block text-black transition hover:text-gray-700">Festival Schedule &amp; Guide</a>
+            <a href="index.html#categories" class="block text-black transition hover:text-gray-700">Film Selection</a>
+            <a href="index.html#cinexchange" class="block text-black transition hover:text-gray-700">CineXchange</a>
+            <a href="expo.html" class="block text-black transition hover:text-gray-700">CineVerse Expo</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">Masterclasses</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">Workshops/Live Demos</a>
+            <a href="registration.html" class="block text-[#ea5183] transition hover:opacity-90">Registrations</a>
+            <a href="faqs.html" class="block text-black transition hover:text-gray-700">FAQs</a>
+            <a href="media-gallery.html" class="block text-black transition hover:text-gray-700">Media</a>
+        </nav>
+        <div class="mt-auto border-t border-black/10 pt-6">
+            <div class="flex items-center gap-6">
+                <a href="https://www.youtube.com/@IFFDelhi" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="YouTube">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon stroke-linecap="round" stroke-linejoin="round" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61587405451302" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="Facebook">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/iff-delhi-b520973aa/" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="LinkedIn">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://x.com/IFFDelhi" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="X">
+                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/iffdelhi/" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="Instagram">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div id="main-content">
+        <!-- Page Title -->
+        <section id="about-hero-section" class="relative flex h-[700px] flex-col items-center justify-end overflow-hidden bg-[#f8f8f8] bg-cover bg-center bg-no-repeat pb-16 md:h-[900px]" style="background-image: url('assets/faq-image.jpg');">
+            
+        </section>
+
+        <!-- Registration Content -->
+        <section class="-mt-[500px] pb-16 md:pb-24">
+            <div class="mx-auto w-[90%] max-w-[1280px] overflow-hidden text-center">
+                <h1 class="reveal-up font-bold text-white" style="--reveal-delay: 60ms; line-height: 100%; font-size: clamp(2.5rem, 9vw, 150px);">
+                    <span class="uppercase text-white">Registrations</span>
+                </h1>
+            </div>
+            <div class="relative z-10 mx-auto w-[90%] max-w-[1280px] bg-white p-8 shadow-lg md:p-12">
+                <!-- Registration Tabs -->
+                <div class="registration-tabs mt-8">
+                    <div class="flex border-b border-gray-200">
+                        <button type="button" class="registration-tab active border-b-2 border-[#ea5183] px-6 py-3 text-[16px] font-semibold text-[#ea5183] transition" data-tab="media">Media</button>
+                        <button type="button" class="registration-tab border-b-2 border-transparent px-6 py-3 text-[16px] font-semibold text-gray-500 transition hover:text-gray-700" data-tab="general">General Attendee</button>
+                    </div>
+
+                    <div id="tab-media" class="registration-tab-content mt-8">
+                        <div id="media-form-wrapper">
+                        <p class="mb-6 text-[14px] font-medium text-amber-800 md:text-[15px]">IMPORTANT: Only accredited media will be permitted to cover the event. Fields marked with * are mandatory.</p>
+
+                        <form id="media-form" class="flex w-full flex-col gap-6" action="#" method="post" novalidate data-api-url="https://api.example.com/register/media" onsubmit="return false;">
+                            <!-- Choose Media Type -->
+                            <div class="media-field w-full">
+                                <label class="mb-2 block text-[14px] font-medium text-black">CHOOSE YOUR MEDIA TYPE: <span class="text-red-500">*</span></label>
+                                <p class="mb-2 text-[13px] text-gray-600">(Select international if your outlet is headquartered outside India)</p>
+                                <div class="flex flex-wrap gap-4">
+                                    <label class="flex cursor-pointer items-center gap-2"><input type="radio" name="media_type" value="national" class="registration-input" required /> National Media</label>
+                                    <label class="flex cursor-pointer items-center gap-2"><input type="radio" name="media_type" value="international" class="registration-input" /> International Media</label>
+                                    <label class="flex cursor-pointer items-center gap-2"><input type="radio" name="media_type" value="freelance_indian" class="registration-input" /> Freelance Journalist Indian</label>
+                                    <label class="flex cursor-pointer items-center gap-2"><input type="radio" name="media_type" value="freelance_intl" class="registration-input" /> Freelance Journalist International</label>
+                                </div>
+                                <div class="media-form-error media-type-choice-error mt-1 hidden text-sm text-red-500"></div>
+                            </div>
+
+                            <!-- 1. Personal Information -->
+                            <div class="border-t border-gray-200 pt-6">
+                                <h4 class="mb-4 text-[18px] font-bold text-black">1. PERSONAL INFORMATION</h4>
+                                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                    <div class="media-field">
+                                        <label for="media-firstname" class="mb-1 block text-[14px] font-medium text-black">First Name <span class="text-red-500">*</span></label>
+                                        <input type="text" id="media-firstname" name="firstname" required class="media-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                        <div class="media-form-error mt-1 hidden text-sm text-red-500"></div>
+                                    </div>
+                                    <div class="media-field">
+                                        <label for="media-lastname" class="mb-1 block text-[14px] font-medium text-black">Last Name <span class="text-red-500">*</span></label>
+                                        <input type="text" id="media-lastname" name="lastname" required class="media-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                        <div class="media-form-error mt-1 hidden text-sm text-red-500"></div>
+                                    </div>
+                                    <div class="media-field">
+                                        <label for="media-designation" class="mb-1 block text-[14px] font-medium text-black">Designation / Title <span class="text-red-500">*</span></label>
+                                        <input type="text" id="media-designation" name="designation" required class="media-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                        <div class="media-form-error mt-1 hidden text-sm text-red-500"></div>
+                                    </div>
+                                    <div class="media-field">
+                                        <label for="media-nationality" class="mb-1 block text-[14px] font-medium text-black">Nationality <span class="text-red-500">*</span></label>
+                                        <input type="text" id="media-nationality" name="nationality" required class="media-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                        <div class="media-form-error mt-1 hidden text-sm text-red-500"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 space-y-4">
+                                    <div class="media-field">
+                                        <label for="media-email" class="mb-1 block text-[14px] font-medium text-black">Official Email Address <span class="text-red-500">*</span></label>
+                                        <input type="email" id="media-email" name="email" required class="media-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                        <div class="media-form-error mt-1 hidden text-sm text-red-500"></div>
+                                    </div>
+                                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                        <div class="media-field">
+                                            <label for="media-mobile" class="mb-1 block text-[14px] font-medium text-black">Mobile / WhatsApp <span class="text-red-500">*</span></label>
+                                            <input type="tel" id="media-mobile" name="mobile" required class="media-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                            <div class="media-form-error mt-1 hidden text-sm text-red-500"></div>
+                                        </div>
+                                        <div class="media-field">
+                                            <label for="media-dob" class="mb-1 block text-[14px] font-medium text-black">Date of Birth</label>
+                                            <input type="date" id="media-dob" name="dob" class="media-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                        </div>
+                                    </div>
+                                    <div class="media-field">
+                                        <label class="mb-2 block text-[14px] font-medium text-black">Gender</label>
+                                        <div class="flex flex-wrap gap-4">
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="radio" name="gender" value="male" class="media-input" /> Male</label>
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="radio" name="gender" value="female" class="media-input" /> Female</label>
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="radio" name="gender" value="nonbinary" class="media-input" /> Non-binary</label>
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="radio" name="gender" value="prefer_not" class="media-input" /> Prefer not to say</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 2. Organisation & Publication -->
+                            <div class="media-accordion-item faq-item is-open border-t border-gray-200">
+                                <button class="faq-trigger flex w-full items-center justify-between py-4 text-left text-[18px] font-bold text-black transition hover:text-[#ea5183]" type="button" aria-expanded="true">
+                                    <span>2. ORGANISATION &amp; PUBLICATION DETAILS</span>
+                                    <span class="faq-icon ml-4 shrink-0 text-[#ea5183]"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+                                </button>
+                                <div class="faq-content overflow-hidden transition-all">
+                                <div class="space-y-4 pb-4">
+                                    <div class="media-field">
+                                        <label for="media-org" class="mb-1 block text-[14px] font-medium text-black">Organisation / Media House <span class="text-red-500">*</span></label>
+                                        <input type="text" id="media-org" name="organisation" required class="media-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                        <div class="media-form-error mt-1 hidden text-sm text-red-500"></div>
+                                    </div>
+                                    <div class="media-field">
+                                        <label for="media-publication" class="mb-1 block text-[14px] font-medium text-black">Publication / Channel Name <span class="text-red-500">*</span></label>
+                                        <input type="text" id="media-publication" name="publication" required class="media-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                        <div class="media-form-error mt-1 hidden text-sm text-red-500"></div>
+                                    </div>
+                                    <div class="media-field">
+                                        <label class="mb-2 block text-[14px] font-medium text-black">Type of Media <span class="text-red-500">*</span></label>
+                                        <div class="flex flex-wrap gap-x-4 gap-y-2">
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="media_type_detail" value="national_daily" class="media-type-cb media-input" /> National Daily</label>
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="media_type_detail" value="regional" class="media-type-cb media-input" /> Regional Newspaper</label>
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="media_type_detail" value="news_mag" class="media-type-cb media-input" /> News Magazine</label>
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="media_type_detail" value="tv" class="media-type-cb media-input" /> Television Channel</label>
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="media_type_detail" value="radio" class="media-type-cb media-input" /> Radio Station</label>
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="media_type_detail" value="online" class="media-type-cb media-input" /> Online/Digital Media</label>
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="media_type_detail" value="photo_agency" class="media-type-cb media-input" /> Photo Agency</label>
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="media_type_detail" value="wire_agency" class="media-type-cb media-input" /> Wire Agency</label>
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="media_type_detail" value="freelance" class="media-type-cb media-input" /> Freelance Journalist</label>
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="media_type_detail" value="podcast" class="media-type-cb media-input" /> Podcast/Audio</label>
+                                        </div>
+                                        <div class="mt-2 flex flex-wrap items-center gap-2">
+                                            <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="media_type_detail" value="other" id="media-type-other" class="media-type-cb media-input" /> Other:</label>
+                                            <input type="text" name="media_type_other" placeholder="Specify" class="media-input max-w-[200px] rounded border border-gray-300 bg-white px-3 py-2 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                        </div>
+                                        <div class="media-form-error media-type-detail-error mt-1 hidden text-sm text-red-500"></div>
+                                    </div>
+                                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                        <div class="media-field">
+                                            <label for="media-country" class="mb-1 block text-[14px] font-medium text-black">Country of Publication <span class="text-red-500">*</span></label>
+                                            <input type="text" id="media-country" name="country" required class="media-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                            <div class="media-form-error mt-1 hidden text-sm text-red-500"></div>
+                                        </div>
+                                        <div class="media-field">
+                                            <label for="media-circulation" class="mb-1 block text-[14px] font-medium text-black">Circulation / Reach</label>
+                                            <input type="text" id="media-circulation" name="circulation" class="media-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                        </div>
+                                    </div>
+                                    <div class="media-field">
+                                        <label for="media-website" class="mb-1 block text-[14px] font-medium text-black">Website / Social Handle</label>
+                                        <input type="text" id="media-website" name="website" class="media-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" placeholder="Website or social media handle" />
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                            <!-- 3. Coverage & Role -->
+                            <div class="media-accordion-item faq-item border-t border-gray-200">
+                                <button class="faq-trigger flex w-full items-center justify-between py-4 text-left text-[18px] font-bold text-black transition hover:text-[#ea5183]" type="button" aria-expanded="false">
+                                    <span>3. COVERAGE &amp; ROLE DETAILS</span>
+                                    <span class="faq-icon ml-4 shrink-0 text-[#ea5183]"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+                                </button>
+                                <div class="faq-content overflow-hidden transition-all">
+                                <div class="media-field pb-4">
+                                    <label class="mb-2 block text-[14px] font-medium text-black">Type of Coverage Planned <span class="text-red-500">*</span></label>
+                                    <p class="mb-2 text-[13px] text-gray-600">(check all that apply)</p>
+                                    <div class="flex flex-wrap gap-x-4 gap-y-2">
+                                        <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="coverage" value="news" class="coverage-cb media-input" /> News Reporting</label>
+                                        <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="coverage" value="photography" class="coverage-cb media-input" /> Photography</label>
+                                        <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="coverage" value="videography" class="coverage-cb media-input" /> Videography/Filming</label>
+                                        <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="coverage" value="interviews" class="coverage-cb media-input" /> Interviews</label>
+                                        <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="coverage" value="feature" class="coverage-cb media-input" /> Feature Writing</label>
+                                        <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="coverage" value="social" class="coverage-cb media-input" /> Social/Digital Media</label>
+                                        <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="coverage" value="podcast" class="coverage-cb media-input" /> Podcast/Audio</label>
+                                        <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="coverage" value="live" class="coverage-cb media-input" /> Live Streaming</label>
+                                    </div>
+                                    <div class="mt-2 flex flex-wrap items-center gap-2">
+                                        <label class="flex cursor-pointer items-center gap-2"><input type="checkbox" name="coverage" value="other" id="coverage-other" class="coverage-cb media-input" /> Other (specify):</label>
+                                        <input type="text" name="coverage_other" class="media-input max-w-[200px] rounded border border-gray-300 bg-white px-3 py-2 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                    </div>
+                                    <div class="media-form-error coverage-error mt-1 hidden text-sm text-red-500"></div>
+                                </div>
+                                </div>
+                            </div>
+
+                            <!-- 4. Declaration -->
+                            <div class="media-accordion-item faq-item border-t border-gray-200">
+                                <button class="faq-trigger flex w-full items-center justify-between py-4 text-left text-[18px] font-bold text-black transition hover:text-[#ea5183]" type="button" aria-expanded="false">
+                                    <span>4. DECLARATION &amp; CONSENT</span>
+                                    <span class="faq-icon ml-4 shrink-0 text-[#ea5183]"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+                                </button>
+                                <div class="faq-content overflow-hidden transition-all">
+                                <p class="mb-4 text-[14px] leading-relaxed text-black/90">I hereby declare that all information provided in this application is true, accurate, and complete to the best of my knowledge. I understand that any misrepresentation may result in immediate cancellation of my accreditation and/or removal from the event premises.</p>
+                                <p class="mb-4 text-[14px] leading-relaxed text-black/90">I agree to abide by all media guidelines, code of conduct, and protocols issued by the festival organisers. I consent to the processing of my personal data for accreditation verification and event communication.</p>
+                                <div class="media-field pb-4">
+                                    <label class="flex cursor-pointer items-start gap-2">
+                                        <input type="checkbox" name="consent_updates" id="media-consent" class="media-input mt-1" required />
+                                        <span class="text-[14px] text-black">I consent to receiving updates and communications related to IFFD 2026.</span>
+                                    </label>
+                                    <div class="media-form-error consent-error mt-1 hidden text-sm text-red-500"></div>
+                                </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-[250px] rounded bg-[#ea5183] px-6 py-3 text-[16px] font-semibold uppercase tracking-wide text-white transition hover:opacity-90">
+                                Submit
+                            </button>
+                        </form>
+                        </div>
+                        <div id="media-form-success" class="hidden rounded-xl border-2 border-[#ea5183] bg-[#ea5183]/10 px-8 py-12 text-center">
+                            <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#ea5183] text-white">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                            <h3 class="text-[26px] font-bold text-[#ea5183] md:text-[30px]">Thank You!</h3>
+                            <p class="mt-2 text-[18px] font-medium text-gray-800">Your media accreditation form has been successfully submitted.</p>
+                            <p class="mt-3 text-[15px] leading-relaxed text-gray-600">Our team will review your application and reach out to you soon. We can't wait to welcome you as accredited media at IFFD 2026!</p>
+                        </div>
+                    </div>
+
+                    <div id="tab-general" class="registration-tab-content mt-8 hidden">
+                        <div id="registration-form-wrapper">
+                            <h3 class="text-[24px] font-bold text-black md:text-[28px]">Register Your Interest</h3>
+                            <form id="registration-form" class="mt-6 flex w-full flex-col gap-4" action="#" method="post" novalidate data-api-url="https://api.example.com/register/general" onsubmit="return false;">
+                            <div class="w-full">
+                                <label for="reg-fullname" class="mb-1 block text-[14px] font-medium text-black">Full name <span class="text-red-500">*</span></label>
+                                <input type="text" id="reg-fullname" name="fullname" required placeholder="Full name"
+                                    class="registration-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                <div class="registration-form-error mt-1 hidden text-sm text-red-500"></div>
+                            </div>
+                            <div class="w-full">
+                                <label for="reg-email" class="mb-1 block text-[14px] font-medium text-black">Email Address <span class="text-red-500">*</span></label>
+                                <input type="email" id="reg-email" name="email" required placeholder="Email Address"
+                                    class="registration-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                <div class="registration-form-error mt-1 hidden text-sm text-red-500"></div>
+                            </div>
+                            <div class="w-full">
+                                <label for="reg-contact" class="mb-1 block text-[14px] font-medium text-black">Contact No.</label>
+                                <input type="tel" id="reg-contact" name="contact" placeholder="Contact No."
+                                    class="registration-input w-full rounded border border-gray-300 bg-white px-4 py-3 text-black outline-none transition focus:border-[#ea5183] focus:ring-2 focus:ring-[#ea5183]/30" />
+                                <div class="registration-form-error mt-1 hidden text-sm text-red-500"></div>
+                            </div>
+                            <button type="submit" id="registration-form-submit-btn" class="mt-2 w-[250px] rounded bg-[#ea5183] px-6 py-3 text-[16px] font-semibold uppercase tracking-wide text-white transition hover:opacity-90">
+                                Submit
+                            </button>
+                        </form>
+                        </div>
+                        <div id="registration-form-success" class="hidden rounded-xl border-2 border-[#ea5183] bg-[#ea5183]/10 px-8 py-12 text-center">
+                            <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#ea5183] text-white">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                            <h3 class="text-[26px] font-bold text-[#ea5183] md:text-[30px]">Thank You!</h3>
+                            <p class="mt-2 text-[18px] font-medium text-gray-800">Your form has been successfully submitted.</p>
+                            <p class="mt-3 text-[15px] leading-relaxed text-gray-600">We've received your registration and will be in touch with you shortly. We look forward to seeing you at IFFD 2026!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<br/>
+<br/>
+
+        <!-- Footer decorative images -->
+        <div class="relative z-0 flex items-end justify-between">
+            <img src="assets/leftbottom.png" alt="" class="reveal-from-footer h-auto max-h-[160px] w-auto max-w-[240px] object-contain md:max-h-[200px] md:max-w-[280px]" style="--reveal-delay: 0ms;" aria-hidden="true" />
+            <img src="assets/forts.png" alt="" class="reveal-from-footer h-auto max-h-[200px] w-auto max-w-[320px] object-contain object-right md:max-h-[280px] md:max-w-[380px]" style="--reveal-delay: 150ms;" aria-hidden="true" />
+        </div>
+    </div><!-- #main-content -->
+
+    <footer class="relative z-10 bg-black text-white">
+        <div class="mx-auto w-[90%] max-w-[1280px] py-10">
+            <div class="flex flex-col items-center gap-8 text-center">
+                <div>
+                    <a href="index.html"><img src="assets/logo.jpg" alt="IFFD Logo" class="mx-auto h-auto w-[150px] object-contain" /></a>
+                </div>
+                <p class="max-w-[720px] text-[15px] leading-relaxed text-white/90 md:text-[16px]">
+                    IFFD is a flagship initiative envisioned under the Delhi Film Policy. It is organised by the Delhi Tourism and Transport Development Corporation Ltd. (DTTDC) in association with the Government of Delhi.
+                </p>
+                <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[14px] font-medium md:gap-x-8">
+                    <a href="about.html" class="text-[#ea5183] transition hover:opacity-90">About Us</a>
+                    <a href="coming-soon.html" class="text-[#ea5183] transition hover:opacity-90">Festival Schedule &amp; Guide</a>
+                    <a href="index.html#categories" class="text-[#ea5183] transition hover:opacity-90">Film Selection</a>
+                    <a href="index.html#cinexchange" class="text-[#ea5183] transition hover:opacity-90">CineXchange</a>
+                    <a href="expo.html" class="text-[#ea5183] transition hover:opacity-90">CineVerse Expo</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">Masterclasses</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">Workshops/Live Demos</a>
+                    <a href="registration.html" class="text-[#ea5183] transition hover:opacity-90">Registrations</a>
+                    <a href="faqs.html" class="text-[#ea5183] transition hover:opacity-90">FAQs</a>
+                    <a href="media-gallery.html" class="text-[#ea5183] transition hover:opacity-90">MEDIA</a>
+                </nav>
+                <div class="flex items-center justify-center gap-6">
+                    <a href="https://www.youtube.com/@IFFDelhi" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="YouTube">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon stroke-linecap="round" stroke-linejoin="round" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61587405451302" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="Facebook">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/iff-delhi-b520973aa/" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="LinkedIn">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="https://x.com/IFFDelhi" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="X">
+                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/iffdelhi/" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="Instagram">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                </div>
+                <p class="mt-4 border-t border-white/20 pt-8 text-[14px] text-white/70">
+                    Copyright © IFFD - 2026. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+</body>
+</html>

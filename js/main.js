@@ -9,6 +9,29 @@
     const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
     const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
+    function formDataToObject(form) {
+        const data = {};
+        const formData = new FormData(form);
+        for (const [key, value] of formData.entries()) {
+            if (data[key]) {
+                data[key] = Array.isArray(data[key]) ? [...data[key], value] : [data[key], value];
+            } else {
+                data[key] = value;
+            }
+        }
+        return data;
+    }
+
+    function postFormToApi(form, apiUrl) {
+        if (!apiUrl || !form) return Promise.reject(new Error("Missing form or API URL"));
+        const data = formDataToObject(form);
+        return fetch(apiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+    }
+
     function initHeaderInteractions() {
         const menuToggle = document.getElementById("menu-toggle");
         const menuClose = document.getElementById("menu-close");
@@ -647,13 +670,390 @@
             input?.addEventListener("input", () => clearError(input));
         });
 
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
+        const submitBtn = form.querySelector("#registration-form-submit-btn");
+        const handleSubmit = async () => {
             const nameOk = validateName();
             const emailOk = validateEmail();
-            const mobileOk = validateMobile();
-            if (nameOk && emailOk && mobileOk) {
-                form.submit();
+            const contactOk = validateContact();
+            if (!nameOk || !emailOk || !contactOk) return;
+            const apiUrl = form.dataset.apiUrl || "";
+            if (!apiUrl) {
+                console.warn("Registration form: Set data-api-url attribute with your API endpoint.");
+                return;
+            }
+            const originalText = submitBtn?.textContent;
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Submitting...";
+            }
+            try {
+                const res = await postFormToApi(form, apiUrl);
+                if (res.ok) {
+                    const wrapper = document.getElementById("registration-form-wrapper");
+                    const successEl = document.getElementById("registration-form-success");
+                    if (wrapper) wrapper.classList.add("hidden");
+                    if (successEl) successEl.classList.remove("hidden");
+                    form.reset();
+                } else {
+                    throw new Error(res.statusText || "Request failed");
+                }
+            } catch (err) {
+                console.error("Registration form submit error:", err);
+                if (submitBtn) submitBtn.textContent = "Try Again";
+                alert("Could not submit. Please try again later.");
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    if (submitBtn.textContent !== "Submitted!") submitBtn.textContent = originalText;
+                }
+            }
+        };
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleSubmit();
+            return false;
+        });
+    }
+
+    function initRegistrationTabs() {
+        const tabs = document.querySelectorAll(".registration-tab");
+        const contents = document.querySelectorAll(".registration-tab-content");
+        if (!tabs.length || !contents.length) return;
+
+        tabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+                const targetId = "tab-" + (tab.dataset.tab || "");
+                tabs.forEach((t) => {
+                    t.classList.remove("active", "border-[#ea5183]", "text-[#ea5183]");
+                    t.classList.add("border-transparent", "text-gray-500");
+                });
+                tab.classList.add("active", "border-[#ea5183]", "text-[#ea5183]");
+                tab.classList.remove("border-transparent", "text-gray-500");
+
+                contents.forEach((c) => {
+                    c.classList.add("hidden");
+                    if (c.id === targetId) c.classList.remove("hidden");
+                });
+            });
+        });
+    }
+
+    function initRegistrationFormValidation() {
+        const form = document.getElementById("registration-form");
+        if (!form) return;
+
+        const nameInput = form.querySelector('input[name="fullname"]');
+        const emailInput = form.querySelector('input[name="email"]');
+        const contactInput = form.querySelector('input[name="contact"]');
+
+        const ERROR_CLASS = "border-red-500";
+
+        function getErrorEl(input) {
+            return input.closest(".w-full")?.querySelector(".registration-form-error");
+        }
+
+        function showError(input, message) {
+            input.classList.add(ERROR_CLASS);
+            input.classList.remove("border-gray-300");
+            const err = getErrorEl(input);
+            if (err) {
+                err.textContent = message;
+                err.classList.remove("hidden");
+            }
+        }
+
+        function clearError(input) {
+            input.classList.remove(ERROR_CLASS);
+            input.classList.add("border-gray-300");
+            const err = getErrorEl(input);
+            if (err) {
+                err.textContent = "";
+                err.classList.add("hidden");
+            }
+        }
+
+        function validateName() {
+            const v = (nameInput?.value || "").trim();
+            if (!v) {
+                showError(nameInput, "Full name is required.");
+                return false;
+            }
+            if (v.length < 2) {
+                showError(nameInput, "Full name must be at least 2 characters.");
+                return false;
+            }
+            clearError(nameInput);
+            return true;
+        }
+
+        function validateEmail() {
+            const v = (emailInput?.value || "").trim();
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!v) {
+                showError(emailInput, "Email is required.");
+                return false;
+            }
+            if (!re.test(v)) {
+                showError(emailInput, "Please enter a valid email address.");
+                return false;
+            }
+            clearError(emailInput);
+            return true;
+        }
+
+        function validateContact() {
+            const v = (contactInput?.value || "").trim();
+            if (!v) {
+                clearError(contactInput);
+                return true;
+            }
+            const digits = v.replace(/\D/g, "");
+            if (digits.length < 10 || digits.length > 15) {
+                showError(contactInput, "Please enter a valid contact number (10–15 digits).");
+                return false;
+            }
+            clearError(contactInput);
+            return true;
+        }
+
+        [nameInput, emailInput, contactInput].forEach((input) => {
+            input?.addEventListener("blur", () => {
+                if (input === nameInput) validateName();
+                if (input === emailInput) validateEmail();
+                if (input === contactInput) validateContact();
+            });
+            input?.addEventListener("input", () => clearError(input));
+        });
+
+        const submitBtn = form.querySelector("#registration-form-submit-btn");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const nameOk = validateName();
+            const emailOk = validateEmail();
+            const contactOk = validateContact();
+            if (!nameOk || !emailOk || !contactOk) return;
+            const apiUrl = form.dataset.apiUrl || "";
+            if (!apiUrl) {
+                console.warn("Registration form: Set data-api-url attribute with your API endpoint.");
+                return;
+            }
+            const originalText = submitBtn?.textContent;
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Submitting...";
+            }
+            try {
+                const res = await postFormToApi(form, apiUrl);
+                if (res.ok) {
+                    const wrapper = document.getElementById("registration-form-wrapper");
+                    const successEl = document.getElementById("registration-form-success");
+                    if (wrapper) wrapper.classList.add("hidden");
+                    if (successEl) successEl.classList.remove("hidden");
+                    form.reset();
+                } else {
+                    throw new Error(res.statusText || "Request failed");
+                }
+            } catch (err) {
+                console.error("Registration form submit error:", err);
+                if (submitBtn) submitBtn.textContent = "Try Again";
+                alert("Could not submit. Please try again later.");
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    if (submitBtn.textContent !== "Submitted!") submitBtn.textContent = originalText;
+                }
+            }
+        });
+    }
+
+    function initMediaFormValidation() {
+        const form = document.getElementById("media-form");
+        if (!form) return;
+
+        const ERROR_CLASS = "border-red-500";
+
+        function getErrorEl(el, selector = ".media-form-error") {
+            if (selector === "media-type-choice-error") return form.querySelector(".media-type-choice-error");
+            if (selector === "media-type-detail-error") return form.querySelector(".media-type-detail-error");
+            if (selector === "coverage-error") return form.querySelector(".coverage-error");
+            if (selector === "consent-error") return form.querySelector(".consent-error");
+            return el?.closest(".media-field")?.querySelector(".media-form-error");
+        }
+
+        function showError(el, message, errorSelector) {
+            if (el && el.classList) {
+                el.classList.add(ERROR_CLASS);
+                el.classList.remove("border-gray-300");
+            }
+            const err = errorSelector ? getErrorEl(null, errorSelector) : getErrorEl(el);
+            if (err) {
+                err.textContent = message;
+                err.classList.remove("hidden");
+            }
+        }
+
+        function clearError(el, errorSelector) {
+            if (el && el.classList) {
+                el.classList.remove(ERROR_CLASS);
+                el.classList.add("border-gray-300");
+            }
+            const err = errorSelector ? getErrorEl(null, errorSelector) : getErrorEl(el);
+            if (err) {
+                err.textContent = "";
+                err.classList.add("hidden");
+            }
+        }
+
+        function validateRequiredText(input, fieldName) {
+            const v = (input?.value || "").trim();
+            if (!v) {
+                showError(input, `${fieldName} is required.`);
+                return false;
+            }
+            if (v.length < 2) {
+                showError(input, `${fieldName} must be at least 2 characters.`);
+                return false;
+            }
+            clearError(input);
+            return true;
+        }
+
+        function validateEmail() {
+            const input = form.querySelector('input[name="email"]');
+            const v = (input?.value || "").trim();
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!v) {
+                showError(input, "Email is required.");
+                return false;
+            }
+            if (!re.test(v)) {
+                showError(input, "Please enter a valid email address.");
+                return false;
+            }
+            clearError(input);
+            return true;
+        }
+
+        function validateMobile() {
+            const input = form.querySelector('input[name="mobile"]');
+            const v = (input?.value || "").trim().replace(/\D/g, "");
+            if (!v || v.length < 10) {
+                showError(input, "Mobile/WhatsApp is required (10+ digits).");
+                return false;
+            }
+            if (v.length > 15) {
+                showError(input, "Please enter a valid mobile number (10–15 digits).");
+                return false;
+            }
+            clearError(input);
+            return true;
+        }
+
+        function validateMediaType() {
+            const selected = form.querySelector('input[name="media_type"]:checked');
+            if (!selected) {
+                showError(null, "Please select your media type.", "media-type-choice-error");
+                return false;
+            }
+            clearError(null, "media-type-choice-error");
+            return true;
+        }
+
+        function validateTypeOfMedia() {
+            const checked = form.querySelectorAll('.media-type-cb:checked');
+            if (!checked.length) {
+                showError(null, "Please select at least one type of media.", "media-type-detail-error");
+                return false;
+            }
+            clearError(null, "media-type-detail-error");
+            return true;
+        }
+
+        function validateCoverage() {
+            const checked = form.querySelectorAll('.coverage-cb:checked');
+            if (!checked.length) {
+                showError(null, "Please select at least one type of coverage.", "coverage-error");
+                return false;
+            }
+            clearError(null, "coverage-error");
+            return true;
+        }
+
+        function validateConsent() {
+            const cb = form.querySelector('#media-consent');
+            if (!cb?.checked) {
+                showError(cb, "You must consent to receive updates.", "consent-error");
+                return false;
+            }
+            clearError(null, "consent-error");
+            return true;
+        }
+
+        const textInputs = ["firstname", "lastname", "designation", "nationality", "organisation", "publication", "country"];
+        textInputs.forEach((name) => {
+            const input = form.querySelector(`input[name="${name}"]`);
+            const label = (name.charAt(0).toUpperCase() + name.slice(1)).replace(/_/g, " ");
+            input?.addEventListener("blur", () => validateRequiredText(input, label));
+            input?.addEventListener("input", () => clearError(input));
+        });
+
+        form.querySelector('input[name="email"]')?.addEventListener("blur", () => validateEmail());
+        form.querySelector('input[name="email"]')?.addEventListener("input", () => clearError(form.querySelector('input[name="email"]')));
+        form.querySelector('input[name="mobile"]')?.addEventListener("blur", () => validateMobile());
+        form.querySelector('input[name="mobile"]')?.addEventListener("input", () => clearError(form.querySelector('input[name="mobile"]')));
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const ok =
+                validateMediaType() &&
+                validateRequiredText(form.querySelector('input[name="firstname"]'), "First name") &&
+                validateRequiredText(form.querySelector('input[name="lastname"]'), "Last name") &&
+                validateRequiredText(form.querySelector('input[name="designation"]'), "Designation/Title") &&
+                validateRequiredText(form.querySelector('input[name="nationality"]'), "Nationality") &&
+                validateEmail() &&
+                validateMobile() &&
+                validateRequiredText(form.querySelector('input[name="organisation"]'), "Organisation/Media House") &&
+                validateRequiredText(form.querySelector('input[name="publication"]'), "Publication/Channel Name") &&
+                validateTypeOfMedia() &&
+                validateRequiredText(form.querySelector('input[name="country"]'), "Country of Publication") &&
+                validateCoverage() &&
+                validateConsent();
+            if (!ok) return;
+            const apiUrl = form.dataset.apiUrl || "";
+            if (!apiUrl) {
+                console.warn("Media form: Set data-api-url attribute with your API endpoint.");
+                return;
+            }
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn?.textContent;
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Submitting...";
+            }
+            try {
+                const res = await postFormToApi(form, apiUrl);
+                if (res.ok) {
+                    const wrapper = document.getElementById("media-form-wrapper");
+                    const successEl = document.getElementById("media-form-success");
+                    if (wrapper) wrapper.classList.add("hidden");
+                    if (successEl) successEl.classList.remove("hidden");
+                    form.reset();
+                } else {
+                    throw new Error(res.statusText || "Request failed");
+                }
+            } catch (err) {
+                console.error("Media form submit error:", err);
+                if (submitBtn) submitBtn.textContent = "Submit";
+                alert("Could not submit. Please try again later.");
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    if (originalText && submitBtn.textContent !== "Submitted!") submitBtn.textContent = originalText;
+                }
             }
         });
     }
@@ -663,22 +1063,17 @@
         triggers.forEach((btn) => {
             btn.addEventListener("click", () => {
                 const item = btn.closest(".faq-item");
-                const icon = btn.querySelector(".faq-icon");
                 const isOpen = item.classList.contains("is-open");
                 if (isOpen) {
                     item.classList.remove("is-open");
-                    if (icon) icon.textContent = "+";
                     btn.setAttribute("aria-expanded", "false");
                 } else {
                     document.querySelectorAll(".faq-item").forEach((i) => {
                         i.classList.remove("is-open");
                         const t = i.querySelector(".faq-trigger");
-                        const ic = i.querySelector(".faq-icon");
                         if (t) t.setAttribute("aria-expanded", "false");
-                        if (ic) ic.textContent = "+";
                     });
                     item.classList.add("is-open");
-                    if (icon) icon.textContent = "−";
                     btn.setAttribute("aria-expanded", "true");
                 }
             });
@@ -697,5 +1092,8 @@
     initStarBorder();
     initViewFilmPopup();
     initContactFormValidation();
+    initRegistrationTabs();
+    initRegistrationFormValidation();
+    initMediaFormValidation();
     initFaqAccordion();
 })();

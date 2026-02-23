@@ -298,14 +298,70 @@ body.header-compact-active #main-content {
 .faq-item.is-open .faq-content {
     max-height: 1200px;
 }
+.media-accordion-item.faq-item.is-open .faq-content {
+    max-height: 2500px;
+}
 .faq-item .faq-icon {
     color: #ea5183;
     font-weight: 300;
     line-height: 1;
     transition: transform 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+.faq-item.is-open .faq-icon {
+    transform: rotate(180deg);
 }
 .faq-trigger {
     cursor: pointer;
+}
+
+/* Registration tabs */
+.registration-tab {
+    cursor: pointer;
+}
+.registration-tab:focus {
+    outline: none;
+}
+
+/* Styled checkboxes and radios - pink check, larger size */
+.registration-tabs input[type="checkbox"],
+.registration-tabs input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    border: 2px solid #d1d5db;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    vertical-align: middle;
+}
+.registration-tabs input[type="checkbox"] {
+    border-radius: 6px;
+}
+.registration-tabs input[type="radio"] {
+    border-radius: 50%;
+}
+.registration-tabs input[type="checkbox"]:hover,
+.registration-tabs input[type="radio"]:hover {
+    border-color: #ea5183;
+}
+.registration-tabs input[type="checkbox"]:checked,
+.registration-tabs input[type="radio"]:checked {
+    background-color: #ea5183;
+    border-color: #ea5183;
+}
+.registration-tabs input[type="checkbox"]:checked {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: 14px 14px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.registration-tabs input[type="radio"]:checked {
+    background-image: radial-gradient(circle at center, white 6px, transparent 6px);
 }
 
 /* Transparent text with thin white outline - bold, large */
