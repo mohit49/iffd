@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - IFFD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style/main.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header" class="fixed left-0 right-0 top-0 z-50 w-full overflow-visible bg-white">
+        <div class="header-inner relative mx-auto flex w-[90%] items-center justify-between">
+            <a href="index.html" class="flex h-full shrink-0 items-center self-stretch">
+                <img src="assets/logo.jpg" alt="IFFD Logo" class="header-logo h-full max-h-[100px] w-auto object-contain transition-[max-height] duration-300" />
+            </a>
+
+            <nav
+                id="desktop-full-nav"
+                class="nav-hover-nav relative ml-6 hidden h-full items-center justify-center gap-x-2 px-6 text-[14px] font-medium text-black min-[1481px]:flex"
+            >
+                <span class="nav-hover-indicator"></span>
+                <a href="about.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">About Us</a>
+                <a href="coming-soon.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Festival Schedule &amp; Guide</a>
+                <a href="index.html#categories" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Film Selection</a>
+                <a href="index.html#cinexchange" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineXchange</a>
+                <a href="expo.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineVerse Expo</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Masterclasses</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Workshops/Live Demos</a>
+                <a href="#" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Registrations</a>
+                <a href="faqs.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">FAQs</a>
+                <a href="media-gallery.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Media</a>
+            </nav>
+
+            <nav
+                id="desktop-compact-nav"
+                class="nav-hover-nav ml-6 hidden h-full items-center justify-center gap-x-2 px-6 text-[14px] font-medium text-black min-[1024px]:flex min-[1481px]:hidden"
+            >
+                <span class="nav-hover-indicator"></span>
+                <a href="about.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">About Us</a>
+                <a href="coming-soon.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Festival Schedule &amp; Guide</a>
+                <a href="index.html#categories" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">Film Selection</a>
+                <a href="index.html#cinexchange" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineXchange</a>
+                <a href="expo.html" class="nav-hover-link h-full whitespace-nowrap px-2 transition hover:text-white">CineVerse Expo</a>
+                <div class="relative">
+                    <button id="desktop-more-toggle" class="nav-hover-link flex h-full items-center gap-2 px-2 transition hover:text-white" type="button">
+                        <span>More</span>
+                        <svg id="desktop-more-arrow" class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.51a.75.75 0 01-1.08 0l-4.25-4.51a.75.75 0 01.02-1.06z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    <div id="desktop-more-menu" class="absolute right-0 top-full z-30 mt-3 hidden min-w-[220px] rounded border border-black/10 bg-white p-3 text-[14px] text-black shadow-lg">
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">Masterclasses</a>
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">Workshops/Live Demos</a>
+                        <a href="#" class="block px-2 py-1.5 transition hover:text-gray-700">Registrations</a>
+                        <a href="faqs.html" class="block px-2 py-1.5 transition hover:text-gray-700">FAQs</a>
+                        <a href="media-gallery.html" class="block px-2 py-1.5 transition hover:text-gray-700">Media</a>
+                    </div>
+                </div>
+            </nav>
+
+            <button
+                id="menu-toggle"
+                class="inline-flex h-10 w-10 items-center justify-center rounded border border-black/20 text-black transition hover:bg-black/5 lg:hidden"
+                aria-label="Open menu"
+                type="button"
+            >
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </button>
+
+            <img
+                src="assets/Delhi-Govt.png"
+                alt="Delhi Government"
+                class="hidden w-[150px] shrink-0 lg:block"
+            />
+
+            <img
+                src="assets/Delhi-Govt.png"
+                alt="Delhi Government"
+                class="pointer-events-none absolute left-1/2 top-1/2 w-[92px] -translate-x-1/2 -translate-y-1/2 lg:hidden"
+            />
+        </div>
+    </header>
+
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-[999] hidden bg-black/60 lg:hidden" aria-hidden="true"></div>
+    <aside
+        id="mobile-menu-drawer"
+        class="fixed right-0 top-0 z-[1000] flex h-full w-[320px] max-w-[85vw] translate-x-full flex-col overflow-y-auto bg-white p-6 text-black transition-transform duration-300 ease-in-out lg:hidden"
+        aria-label="Mobile menu"
+    >
+        <div class="flex items-center justify-between">
+            <span class="text-[14px] font-semibold uppercase tracking-wide text-black/70">Menu</span>
+            <button
+                id="menu-close"
+                class="inline-flex h-9 w-9 items-center justify-center rounded border border-black/20 transition hover:bg-black/5"
+                aria-label="Close menu"
+                type="button"
+            >
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M6 6l12 12M18 6l-12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </button>
+        </div>
+
+        <nav id="mobile-menu-links" class="mt-10 flex flex-col gap-5 text-[16px] font-medium text-black">
+            <a href="about.html" class="block text-black transition hover:text-gray-700">About Us</a>
+            <a href="coming-soon.html" class="block text-black transition hover:text-gray-700">Festival Schedule &amp; Guide</a>
+            <a href="index.html#categories" class="block text-black transition hover:text-gray-700">Film Selection</a>
+            <a href="index.html#cinexchange" class="block text-black transition hover:text-gray-700">CineXchange</a>
+            <a href="expo.html" class="block text-black transition hover:text-gray-700">CineVerse Expo</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">Masterclasses</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">Workshops/Live Demos</a>
+            <a href="#" class="block text-black transition hover:text-gray-700">Registrations</a>
+            <a href="faqs.html" class="block text-black transition hover:text-gray-700">FAQs</a>
+            <a href="media-gallery.html" class="block text-black transition hover:text-gray-700">Media</a>
+        </nav>
+        <div class="mt-auto border-t border-black/10 pt-6">
+            <div class="flex items-center gap-6">
+                <a href="https://www.youtube.com/@IFFDelhi" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="YouTube">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon stroke-linecap="round" stroke-linejoin="round" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61587405451302" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="Facebook">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/iff-delhi-b520973aa/" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="LinkedIn">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://x.com/IFFDelhi" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="X">
+                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/iffdelhi/" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="Instagram">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div id="main-content">
+        <!-- Coming Soon Hero -->
+        <section class="relative flex min-h-[70vh] flex-col items-center justify-between bg-cover bg-center bg-no-repeat pt-12 md:min-h-[80vh] md:pt-16" style="background-image: url('assets/natraj.png');">
+            <div class="mx-auto w-[90%] max-w-[1280px] flex-1 flex items-center justify-center">
+                <div class="text-center">
+                    <p class="reveal-up text-[22px] font-semibold uppercase tracking-wide text-white/90 md:text-[26px]" style="--reveal-delay: 60ms;">More Information :</p>
+                    <h1 class="reveal-up mt-2 font-bold uppercase text-white drop-shadow-lg" style="--reveal-delay: 80ms; line-height: 100%; font-size: clamp(2.5rem, 10vw, 120px);">
+                        Coming Soon
+                    </h1>
+                </div>
+            </div>
+            <img src="assets/comin-flower.png" alt="" class="mb-[-80px] h-auto max-h-[200px] w-auto max-w-[300px] object-contain md:mb-[-100px] md:max-h-[260px] md:max-w-[340px]" aria-hidden="true" />
+        </section>
+
+        <!-- Footer decorative images -->
+        <div class="relative z-0 flex items-end justify-between">
+            <img src="assets/leftbottom.png" alt="" class="reveal-from-footer h-auto max-h-[160px] w-auto max-w-[240px] object-contain md:max-h-[200px] md:max-w-[280px]" style="--reveal-delay: 0ms;" aria-hidden="true" />
+            <img src="assets/forts.png" alt="" class="reveal-from-footer h-auto max-h-[200px] w-auto max-w-[320px] object-contain object-right md:max-h-[280px] md:max-w-[380px]" style="--reveal-delay: 150ms;" aria-hidden="true" />
+        </div>
+    </div><!-- #main-content -->
+
+    <footer class="relative z-10 bg-black text-white">
+        <div class="mx-auto w-[90%] max-w-[1280px] py-10">
+            <div class="flex flex-col items-center gap-8 text-center">
+                <div>
+                    <a href="index.html"><img src="assets/logo.jpg" alt="IFFD Logo" class="mx-auto h-auto w-[150px] object-contain" /></a>
+                </div>
+                <p class="max-w-[720px] text-[15px] leading-relaxed text-white/90 md:text-[16px]">
+                    IFFD is a flagship initiative envisioned under the Delhi Film Policy. It is organised by the Delhi Tourism and Transport Development Corporation Ltd. (DTTDC) in association with the Government of Delhi.
+                </p>
+                <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[14px] font-medium md:gap-x-8">
+                    <a href="about.html" class="text-[#ea5183] transition hover:opacity-90">About Us</a>
+                    <a href="coming-soon.html" class="text-[#ea5183] transition hover:opacity-90">Festival Schedule &amp; Guide</a>
+                    <a href="index.html#categories" class="text-[#ea5183] transition hover:opacity-90">Film Selection</a>
+                    <a href="index.html#cinexchange" class="text-[#ea5183] transition hover:opacity-90">CineXchange</a>
+                    <a href="expo.html" class="text-[#ea5183] transition hover:opacity-90">CineVerse Expo</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">Masterclasses</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">Workshops/Live Demos</a>
+                    <a href="#" class="text-[#ea5183] transition hover:opacity-90">Registrations</a>
+                    <a href="faqs.html" class="text-[#ea5183] transition hover:opacity-90">FAQs</a>
+                    <a href="media-gallery.html" class="text-[#ea5183] transition hover:opacity-90">MEDIA</a>
+                </nav>
+                <div class="flex items-center justify-center gap-6">
+                    <a href="https://www.youtube.com/@IFFDelhi" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="YouTube">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon stroke-linecap="round" stroke-linejoin="round" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61587405451302" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="Facebook">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/iff-delhi-b520973aa/" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="LinkedIn">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="https://x.com/IFFDelhi" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="X">
+                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/iffdelhi/" target="_blank" rel="noopener noreferrer" class="text-[#ea5183] transition hover:opacity-90" aria-label="Instagram">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                </div>
+                <p class="mt-4 border-t border-white/20 pt-8 text-[14px] text-white/70">
+                    Copyright © IFFD - 2026. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+</body>
+</html>

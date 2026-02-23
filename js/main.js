@@ -284,8 +284,164 @@
         requestParallax();
     }
 
+    function initAboutParallax() {
+        const aboutHero = document.getElementById("about-hero-section");
+        const aboutIffdBg = document.getElementById("about-iffd-bg");
+        const iff2026Bg = document.getElementById("iffd-2026-bg");
+
+        if (!aboutHero && !aboutIffdBg && !iff2026Bg) return;
+
+        let ticking = false;
+
+        const updateAboutParallax = () => {
+            if (aboutHero) {
+                const rect = aboutHero.getBoundingClientRect();
+                const viewportHeight = window.innerHeight || 0;
+                if (rect.bottom > 0 && rect.top < viewportHeight && window.innerWidth >= PARALLAX_MOBILE_BREAKPOINT) {
+                    const heroTop = aboutHero.offsetTop;
+                    const scrollDelta = window.scrollY - heroTop;
+                    const bgOffset = clamp(scrollDelta * 0.22, -120, 120);
+                    aboutHero.style.backgroundPosition = `center calc(50% + ${bgOffset}px)`;
+                }
+            }
+            if (aboutIffdBg) {
+                const section = aboutIffdBg.closest("section");
+                if (section) {
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight || 0;
+                    if (rect.bottom > 0 && rect.top < viewportHeight && window.innerWidth >= PARALLAX_MOBILE_BREAKPOINT) {
+                        const sectionTop = section.offsetTop;
+                        const scrollDelta = window.scrollY - sectionTop;
+                        const bgOffset = clamp(scrollDelta * 0.28, 0, 80);
+                        aboutIffdBg.style.transform = `translate3d(0, ${bgOffset}px, 0)`;
+                    }
+                }
+            }
+            if (iff2026Bg) {
+                const section = iff2026Bg.closest("section");
+                if (section) {
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight || 0;
+                    if (rect.bottom > 0 && rect.top < viewportHeight && window.innerWidth >= PARALLAX_MOBILE_BREAKPOINT) {
+                        const sectionTop = section.offsetTop;
+                        const scrollDelta = window.scrollY - sectionTop;
+                        const bgOffset = clamp(scrollDelta * 0.28, 0, 80);
+                        iff2026Bg.style.transform = `translate3d(0, ${bgOffset}px, 0)`;
+                    }
+                }
+            }
+            ticking = false;
+        };
+
+        const requestAboutParallax = () => {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(updateAboutParallax);
+        };
+
+        if (aboutHero) aboutHero.style.willChange = "background-position";
+        if (aboutIffdBg) aboutIffdBg.style.willChange = "transform";
+        if (iff2026Bg) iff2026Bg.style.willChange = "transform";
+
+        window.addEventListener("scroll", requestAboutParallax, { passive: true });
+        window.addEventListener("resize", requestAboutParallax);
+        requestAboutParallax();
+    }
+
+    function initMediaGalleryParallax() {
+        const mediaSpan = document.getElementById("media-gallery-media");
+        const gallerySpan = document.getElementById("media-gallery-gallery");
+        const heroSection = document.getElementById("media-gallery-hero");
+        if (!mediaSpan || !gallerySpan || !heroSection) return;
+
+        let ticking = false;
+
+        const updateParallax = () => {
+            if (window.innerWidth < PARALLAX_MOBILE_BREAKPOINT) {
+                mediaSpan.style.transform = "";
+                gallerySpan.style.transform = "";
+                ticking = false;
+                return;
+            }
+
+            const rect = heroSection.getBoundingClientRect();
+            const viewportHeight = window.innerHeight || 0;
+            const isVisible = rect.bottom > 0 && rect.top < viewportHeight;
+
+            if (isVisible) {
+                const scrollDelta = window.scrollY - heroSection.offsetTop;
+                const mediaOffset = clamp(scrollDelta * 0.25, -80, 80);
+                const galleryOffset = clamp(scrollDelta * 0.12, -50, 50);
+                mediaSpan.style.transform = `translate3d(0, ${mediaOffset}px, 0)`;
+                gallerySpan.style.transform = `translate3d(0, ${galleryOffset}px, 0)`;
+            } else {
+                mediaSpan.style.transform = "";
+                gallerySpan.style.transform = "";
+            }
+            ticking = false;
+        };
+
+        const requestParallax = () => {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(updateParallax);
+        };
+
+        mediaSpan.style.willChange = "transform";
+        gallerySpan.style.willChange = "transform";
+        window.addEventListener("scroll", requestParallax, { passive: true });
+        window.addEventListener("resize", requestParallax);
+        requestParallax();
+    }
+
+    function initExpoParallax() {
+        const cineverseSpan = document.getElementById("expo-cineverse");
+        const expoSpan = document.getElementById("expo-expo");
+        const heroSection = document.getElementById("expo-hero");
+        if (!cineverseSpan || !expoSpan || !heroSection) return;
+
+        let ticking = false;
+
+        const updateParallax = () => {
+            if (window.innerWidth < PARALLAX_MOBILE_BREAKPOINT) {
+                cineverseSpan.style.transform = "";
+                expoSpan.style.transform = "";
+                ticking = false;
+                return;
+            }
+
+            const rect = heroSection.getBoundingClientRect();
+            const viewportHeight = window.innerHeight || 0;
+            const isVisible = rect.bottom > 0 && rect.top < viewportHeight;
+
+            if (isVisible) {
+                const scrollDelta = window.scrollY - heroSection.offsetTop;
+                const cineverseOffset = clamp(scrollDelta * 0.25, -80, 80);
+                const expoOffset = clamp(scrollDelta * 0.12, -50, 50);
+                cineverseSpan.style.transform = `translate3d(0, ${cineverseOffset}px, 0)`;
+                expoSpan.style.transform = `translate3d(0, ${expoOffset}px, 0)`;
+            } else {
+                cineverseSpan.style.transform = "";
+                expoSpan.style.transform = "";
+            }
+            ticking = false;
+        };
+
+        const requestParallax = () => {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(updateParallax);
+        };
+
+        cineverseSpan.style.willChange = "transform";
+        expoSpan.style.willChange = "transform";
+        window.addEventListener("scroll", requestParallax, { passive: true });
+        window.addEventListener("resize", requestParallax);
+        requestParallax();
+    }
+
     function initScrollReveal() {
-        const revealElements = Array.from(document.querySelectorAll(".reveal-left, .reveal-up, .reveal-slide-pop-left, .reveal-slide-pop-right"));
+        const revealElements = Array.from(document.querySelectorAll(".reveal-left, .reveal-up, .reveal-slide-pop-left, .reveal-slide-pop-right, .reveal-from-footer, .reveal-popout"));
         if (!revealElements.length) {
             return;
         }
@@ -407,12 +563,139 @@
         });
     }
 
+    function initContactFormValidation() {
+        const form = document.getElementById("contact-form");
+        if (!form) return;
+
+        const nameInput = form.querySelector('input[name="name"]');
+        const emailInput = form.querySelector('input[name="email"]');
+        const mobileInput = form.querySelector('input[name="mobile"]');
+        const messageInput = form.querySelector('textarea[name="message"]');
+
+        const ERROR_CLASS = "border-red-500";
+        const ERROR_MSG_CLASS = "contact-form-error text-sm text-red-500 mt-1";
+
+        function showError(input, message) {
+            input.classList.add(ERROR_CLASS);
+            input.classList.remove("border-gray-300");
+            let err = input.parentElement?.querySelector("." + ERROR_MSG_CLASS.split(" ")[0]);
+            if (!err) {
+                err = document.createElement("div");
+                err.className = ERROR_MSG_CLASS;
+                input.parentElement?.appendChild(err);
+            }
+            err.textContent = message;
+        }
+
+        function clearError(input) {
+            input.classList.remove(ERROR_CLASS);
+            input.classList.add("border-gray-300");
+            const err = input.parentElement?.querySelector("." + ERROR_MSG_CLASS.split(" ")[0]);
+            if (err) err.remove();
+        }
+
+        function validateName() {
+            const v = (nameInput?.value || "").trim();
+            if (!v) {
+                showError(nameInput, "Name is required.");
+                return false;
+            }
+            if (v.length < 2) {
+                showError(nameInput, "Name must be at least 2 characters.");
+                return false;
+            }
+            clearError(nameInput);
+            return true;
+        }
+
+        function validateEmail() {
+            const v = (emailInput?.value || "").trim();
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!v) {
+                showError(emailInput, "Email is required.");
+                return false;
+            }
+            if (!re.test(v)) {
+                showError(emailInput, "Please enter a valid email address.");
+                return false;
+            }
+            clearError(emailInput);
+            return true;
+        }
+
+        function validateMobile() {
+            const v = (mobileInput?.value || "").trim().replace(/\s/g, "");
+            const digits = v.replace(/\D/g, "");
+            if (!v) {
+                showError(mobileInput, "Mobile number is required.");
+                return false;
+            }
+            if (digits.length < 10 || digits.length > 15) {
+                showError(mobileInput, "Please enter a valid mobile number (10–15 digits).");
+                return false;
+            }
+            clearError(mobileInput);
+            return true;
+        }
+
+        [nameInput, emailInput, mobileInput].forEach((input) => {
+            input?.addEventListener("blur", () => {
+                if (input === nameInput) validateName();
+                if (input === emailInput) validateEmail();
+                if (input === mobileInput) validateMobile();
+            });
+            input?.addEventListener("input", () => clearError(input));
+        });
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const nameOk = validateName();
+            const emailOk = validateEmail();
+            const mobileOk = validateMobile();
+            if (nameOk && emailOk && mobileOk) {
+                form.submit();
+            }
+        });
+    }
+
+    function initFaqAccordion() {
+        const triggers = document.querySelectorAll(".faq-trigger");
+        triggers.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const item = btn.closest(".faq-item");
+                const icon = btn.querySelector(".faq-icon");
+                const isOpen = item.classList.contains("is-open");
+                if (isOpen) {
+                    item.classList.remove("is-open");
+                    if (icon) icon.textContent = "+";
+                    btn.setAttribute("aria-expanded", "false");
+                } else {
+                    document.querySelectorAll(".faq-item").forEach((i) => {
+                        i.classList.remove("is-open");
+                        const t = i.querySelector(".faq-trigger");
+                        const ic = i.querySelector(".faq-icon");
+                        if (t) t.setAttribute("aria-expanded", "false");
+                        if (ic) ic.textContent = "+";
+                    });
+                    item.classList.add("is-open");
+                    if (icon) icon.textContent = "−";
+                    btn.setAttribute("aria-expanded", "true");
+                }
+            });
+        });
+    }
+
     initHeaderInteractions();
     initStickyHeader();
     initNavHoverIndicator();
     initHeroDots();
     initHeroParallax();
+    initAboutParallax();
+    initMediaGalleryParallax();
+    initExpoParallax();
     initScrollReveal();
     initStarBorder();
     initViewFilmPopup();
+    initContactFormValidation();
+    initFaqAccordion();
 })();
